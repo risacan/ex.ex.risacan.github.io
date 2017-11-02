@@ -14,8 +14,8 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://localhost:4000/
-root: /
+url: http://risacan.net/blog/
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
@@ -40,8 +40,8 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
+  enable: false
+  line_number: false
   auto_detect: false
   tab_replace:
 
@@ -83,7 +83,7 @@ deploy:
   repo: git@github.com:risacan/blog.git
   branch: master
 
-# custom
-
-menu:
-  about: /about
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'default'
+  line_number: false    # default false

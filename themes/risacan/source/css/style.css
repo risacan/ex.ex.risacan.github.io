@@ -1,4 +1,5 @@
-@import "https://unpkg.com/tachyons@4.6.1/css/tachyons.min.css";
+@import url("https://unpkg.com/tachyons@4.6.1/css/tachyons.min.css");
+@import url("prism.css");
 
 /* custom */
 
@@ -315,4 +316,12 @@
       padding-left: 0;
       padding-right: 0;
   }
+}
+
+/* custom */
+
+main {
+  background-color: white;
+  border-radius: .3em;
+  padding: .3em;
 }

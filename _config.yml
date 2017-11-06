@@ -4,13 +4,15 @@
 
 # Site
 title: risacan.github.io
-subtitle:
+subtitle: shave the yak with me
 description:
 author: Risa Harada
 author_icon: profile.png
 author_place: Tokyo
 language:
 timezone:
+google_analytics:
+twitter: _risacan_
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -52,7 +54,7 @@ highlight:
 index_generator:
   path: ''
   per_page: 10
-  order_by: -date
+  order_by: -updated_at
 
 # Category & Tag
 default_category: uncategorized
@@ -75,6 +77,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: risacan
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

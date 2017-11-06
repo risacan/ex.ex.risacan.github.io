@@ -1,4 +1,17 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<% if (is_post()) { %>
+  <title><%= page.title %> | <%= config.title %></title>
+<% } else { %>
+  <title><%= config.title %></title>
+<% } %>
 <title><%= config.title %></title>
-<link href="<%- config.url %>/css/style.css" rel="stylesheet" type="text/css" />
-<script src="<%- config.url %>/js/script.js"></script>
+<%- js("js/script.js") %>
+<%- css("css/style.css") %>
+<%- favicon_tag("images/profile.png") %>
+<%- partial("_partial/google_analytics") %>
+<%- open_graph({
+  twitter_id: "_risacan_",
+  twiter_site: "@_risacan_",
+  twitter_card: "summary_large_image"
+}) %>

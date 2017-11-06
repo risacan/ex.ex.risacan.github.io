@@ -4,7 +4,8 @@
 /* custom */
 
 .background {
-  background-image: url("../images/pattern.png")
+  background-image: url("../images/pattern.png");
+  background-color: #F7F0F0;
 }
 
 /* from Tachyons */
@@ -187,25 +188,18 @@
 
 /* Contact Phone */
 
-.bb {
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-}
-
-.b--black-10 {
-  border-color: rgba(0, 0, 0, .1);
-}
-
-.br-100 {
-  border-radius: 100%;
-}
-
 .db {
   display: block;
 }
 
 .flex {
   display: flex;
+}
+
+@media screen and (max-width: 400px) {
+  .flex {
+    display: block;
+  }
 }
 
 .flex-auto {
@@ -324,4 +318,22 @@ main {
   background-color: white;
   border-radius: .3em;
   padding: .3em;
+}
+
+.page-number {
+  font-size: 0;
+  padding: 0 3px;
+}
+
+.extend {
+  padding: 0 3px;
+  text-decoration: none;
+}
+
+.pager a {
+  color: grey;
+}
+
+.article-body {
+  font-size: .8em;
 }

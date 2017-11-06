@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: risacan.net
+title: risacan.github.io
 subtitle:
 description:
 author: Risa Harada
@@ -16,7 +16,7 @@ twitter: _risacan_
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://risacan.net
+url: http://risacan.github.io
 root: /
 permalink: :title/
 permalink_defaults:

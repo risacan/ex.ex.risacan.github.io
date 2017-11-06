@@ -4,7 +4,7 @@
 
 # Site
 title: risacan.github.io
-subtitle: shave the yak with me
+subtitle:
 description:
 author: Risa Harada
 author_icon: profile.png
@@ -16,7 +16,7 @@ twitter: _risacan_
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://localhost:4000/
+url: http://risacan.net
 root: /
 permalink: :title/
 permalink_defaults:
@@ -83,7 +83,7 @@ theme: risacan
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:risacan/blog.git
+  repo: git@github.com:risacan/risacan.github.io.git
   branch: master
 
 prism_plugin:

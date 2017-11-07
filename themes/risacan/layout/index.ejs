@@ -1,7 +1,7 @@
 <ul class="list pl0 mt0">
   <% page.posts.each(function(post){ %>
     <li
-      class="flex items-center lh-copy pa3 ph0-l bb b--black-10">
+      class="list-flex items-center lh-copy pa3 ph0-l bb b--black-10">
         <div class="flex-auto">
           <a href="<%- url_for(post.permalink) %>" class="f6 db black-70"><%- post.title %></a>
         </div>

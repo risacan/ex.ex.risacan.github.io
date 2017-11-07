@@ -192,12 +192,12 @@
   display: block;
 }
 
-.flex {
+.list-flex {
   display: flex;
 }
 
 @media screen and (max-width: 400px) {
-  .flex {
+  .list-flex {
     display: block;
   }
 }
@@ -335,7 +335,7 @@ main {
 }
 
 article {
-  font-size: .7em;
+  font-size: .8em;
   color: rgba(0,0,0,.8);
   line-height: initial;
 }
@@ -350,4 +350,28 @@ article {
   border-radius: .3em;
   margin: 0 5;
   padding: 8 35;
+}
+
+.recommends {
+  margin-top: 2.8em;
+  padding: 0 1.2em;
+  border: .1em solid #000;
+  border-radius: .3em;
+}
+
+.recommends h1 {
+  margin: 0;
+  padding-top: 1rem;
+}
+
+.article-body h1{
+  font-size: 1.8em;
+}
+
+.article-body h2{
+  font-size: 1.6em;
+}
+
+.article-body h3{
+  font-size: 1.4em;
 }

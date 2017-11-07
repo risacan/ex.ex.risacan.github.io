@@ -4,4 +4,7 @@
     <span class="f6 blue"><%- page.date.format('YYYY-MM-DD HH:mm:ss dddd'); %></span>
   <% } %>
   <div class="article-body"><%- page.content %></div>
+  <% if (is_post()) { %>
+    <%- partial("_partial/recommends") %>
+  <% } %>
 </article>

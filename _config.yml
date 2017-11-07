@@ -16,7 +16,8 @@ twitter: _risacan_
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://risacan.github.io
+# url: http://risacan.github.io
+url: http://localhost:4000/
 root: /
 permalink: :title/
 permalink_defaults:
@@ -95,3 +96,13 @@ risacan:
   twitter_id: _risacan_
   twitter_site: "@_risacan_"
   image: https://risacan.github.io/images/pattern.png
+
+githubEmojis:
+  enable: true
+  className: github-emoji
+  unicode: false
+  styles:
+    vertical-align: text-bottom
+    height: 16px
+    width: 16px
+  localEmojis:

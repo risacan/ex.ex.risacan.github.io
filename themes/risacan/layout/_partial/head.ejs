@@ -11,7 +11,7 @@
 <%- favicon_tag("images/profile.png") %>
 <%- partial("_partial/google_analytics") %>
 <%- open_graph({
-  twitter_id: "_risacan_",
-  twiter_site: "@_risacan_",
-  twitter_card: "summary_large_image"
+  twitter_id: config.risacan.twitter_id,
+  twiter_site: config.risacan.twitter_site,
+  image: config.risacan.image
 }) %>

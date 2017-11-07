@@ -334,6 +334,20 @@ main {
   color: grey;
 }
 
-.article-body {
+article {
   font-size: .8em;
+  color: rgba(0,0,0,.8);
+  line-height: initial;
+}
+
+.article-body a {
+  color: #00449e;
+}
+
+.article-body blockquote {
+  border-left: 5px solid #E3D960;
+  background-color: #f5f2f0;
+  border-radius: .3em;
+  margin: 0 5;
+  padding: 8 35;
 }

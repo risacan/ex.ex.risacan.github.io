@@ -37,8 +37,8 @@ build:
     - script:
         name: configure git user
         code: |
-          git config user.name $WERCKER_STARTED_BY
-          git config user.email `git log -1 --format="%ce"`
+          git config --global user.name $WERCKER_STARTED_BY
+          git config --global user.email `git log -1 --format="%ce"`
     - script:
         name: install hexo
         code: npm install hexo -g

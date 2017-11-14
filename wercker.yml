@@ -24,7 +24,6 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
-      package: hexo
     # A step that executes `npm test` command
     - npm-test
 
@@ -35,6 +34,9 @@ build:
         code: |
           echo "node version $(node -v) running"
           echo "npm version $(npm -v) running"
+    - script:
+        name: install hexo
+        code: npm install hexo -g
     - script:
         name: rename
         code: hexo rename source/_posts/*.html.md

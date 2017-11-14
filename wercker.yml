@@ -24,6 +24,7 @@ build:
   steps:
     # A step that executes `npm install` command
     - npm-install
+      package: hexo
     # A step that executes `npm test` command
     - npm-test
 

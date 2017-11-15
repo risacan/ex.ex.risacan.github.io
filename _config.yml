@@ -94,7 +94,6 @@ prism_plugin:
 risacan:
   twitter_id: _risacan_
   twitter_site: "@_risacan_"
-  image: https://risacan.github.io/images/pattern.png
 
 githubEmojis:
   enable: true

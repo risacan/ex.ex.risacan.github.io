@@ -125,10 +125,6 @@
   color: #777;
 }
 
-.pa3 {
-  padding: 1rem;
-}
-
 .pb3 {
   padding-bottom: 1rem;
 }
@@ -264,10 +260,6 @@
 
 .hover-dark-gray:focus {
   color: #333;
-}
-
-.pa3 {
-  padding: 1rem;
 }
 
 .pl0 {

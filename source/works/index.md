@@ -8,4 +8,4 @@ date: 2017-11-01 17:13:24
 
 * [ruboty\-snack](https://github.com/risacan/ruboty-snack) is a plugin for Ruby bot [Ruboty](https://github.com/r7kamura/ruboty).
 
-* [🎋🎎🌌](https://xn--sg8h3hja.tk/) is a online tanabata tree.
+* [🎋🎎🌌](https://xn--sg8h3hja.tk/) is an online tanabata tree.

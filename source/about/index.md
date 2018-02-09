@@ -1,10 +1,12 @@
 ---
 title: about me
-date: 2017-11-01 13:04:20
+date: 2018-02-09 23:30:00
 ---
 
 # Risa Harada 👩🏻‍💻
 * Ruby + emoji + craft beer + dog 🐕
+* Born in Fukuoka, raised in Tokyo. 🗼
+* I love traveling. I've been to 🇰🇷 🇺🇸 🇬🇧 🇨🇿 🇩🇪 🇦🇹 🇦🇺 🇨🇦 🇨🇭 🇮🇹 🇹🇼 🇨🇳 🇳🇱 🇭🇷 🇪🇸 🇭🇺 🇫🇷 🇧🇬 🇧🇦 🇵🇹
 
 # Social links 🔗
 * [GitHub](https://github.com/risacan)
@@ -12,19 +14,16 @@ date: 2017-11-01 13:04:20
 * [Instagram](https://instagram.com/risalikesbeer)
 * [Medium](https://medium.com/@risacan)
 * [Linkedin](https://www.linkedin.com/in/risa-harada/)
-* [Wantedly](https://www.wantedly.com/users/17791600)
 
 # Shop my 👕
 
 * 🇯🇵 [Suzuri](https://suzuri.jp/risacan)
-* 🇯🇵 [Steers](https://steers.jp/u/risacan)
 * 🌎 [Teemill](https://risacan.teemill.com/)
-
-Me in the T shirt. Let's be #yakfriends!
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">Yak shaving T来たので着た！❤️ Mでインしたら文字は隠れちゃった🐃<a href="https://t.co/fMeh3UsRXB">https://t.co/fMeh3UsRXB</a> <a href="https://t.co/KziMZTtPIy">pic.twitter.com/KziMZTtPIy</a></p>&mdash; 📛 Risa Harada (@_risacan_) <a href="https://twitter.com/_risacan_/status/891817221755772930?ref_src=twsrc%5Etfw">2017年7月31日</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 # Favorite projects 💓
 * [GitHub](https://github.com)
 * [esa](https://esa.io)
-* [pplog](https://pplog.net)
+* [emojilib](https://github.com/muan/emojilib)
+
+# That's all
+![](https://media.giphy.com/media/lC82gClpKqaI0/giphy.gif)

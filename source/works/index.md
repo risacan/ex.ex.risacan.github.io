@@ -2,7 +2,7 @@
 title: works
 date: 2017-11-01 17:13:24
 ---
-* [SmartHR Spell Checker](https://github.com/risacan/smarthr-spell-checker) is a spell checker for my favorite company.
+* [SmartHR Spell Checker](https://risacan.net/smarthr-spell-checker/) is a spell checker for my favorite company.
 
 * [Utapri Search](https://risacan.github.io/utapri-search/) is a website where you can search utapri songs by prince name.
 

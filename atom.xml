@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>risacan.github.io</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://risacan.github.io/"/>
+  <updated>2018-06-09T20:41:03.000Z</updated>
+  <id>http://risacan.github.io/</id>
+  
+  <author>
+    <name>Risa Harada</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>リファクタリングのポイント</title>
+    <link href="http://risacan.github.io/%E3%83%AA%E3%83%95%E3%82%A1%E3%82%AF%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88/"/>
+    <id>http://risacan.github.io/リファクタリングのポイント/</id>
+    <published>2018-06-09T20:41:03.000Z</published>
+    <updated>2018-06-09T20:41:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する</p><h1 id="リファクタリング"><a href="#リファクタリング" class="headerlink" title=" リファクタリング"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="art" alt="art" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3a8.png?v8" height="20" width="20"> リファクタリング</h1><ul><li>機能を変えずに良くすること</li></ul><h1 id="リファクタリングをする理由"><a href="#リファクタリングをする理由" class="headerlink" title=" リファクタリングをする理由"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="thought_balloon" alt="thought_balloon" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ad.png?v8" height="20" width="20"> リファクタリングをする理由</h1><ul><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> 読みやすくする</li><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> バグを減らす</li><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> テストしやすくする</li><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="x" alt="x" src="https://assets-cdn.github.com/images/icons/emoji/unicode/274c.png?v8" height="20" width="20">  短くする(かんちがいしないこと！)</li></ul><h1 id=""><a href="#" class="headerlink" title=""></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="memo" alt="memo" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8" height="20" width="20"></h1><ul><li>1つのメソッドは1つの動作</li><li>1つのクラスは1つの責務</li><li>メソッドはアルファベット順に並べる</li><li>tapメソッド</li></ul><h1 id="なまえ"><a href="#なまえ" class="headerlink" title=" なまえ"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="name_badge" alt="name_badge" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4db.png?v8" height="20" width="20"> なまえ</h1><ul><li>単数と複数を使い分ける</li><li>変数は名詞にする</li><li>メソッド名は基本動詞にする</li></ul><h2 id="なまえの例"><a href="#なまえの例" class="headerlink" title="なまえの例"></a>なまえの例</h2><pre class=" language-rb"><code class="language-rb"># organizations_membersorg_members = @client.org_members('snowhalation')list_members = org_members.map { |mem| mem[:login] }</code></pre><ul><li>list_membersは結局配列になる。</li><li>動詞だとメソッドみたいにみえる</li><li>members_listという名詞にする</li></ul><pre class=" language-rb"><code class="language-rb">members_list = org_members.map { |mem| mem[:login] }</code></pre><h1 id="private"><a href="#private" class="headerlink" title=" private"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="see_no_evil" alt="see_no_evil" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f648.png?v8" height="20" width="20"> private</h1><ul><li>外から呼ばないメソッドはprivateメソッドにする</li></ul><h1 id="遅延初期化-lazy-initialization"><a href="#遅延初期化-lazy-initialization" class="headerlink" title=" 遅延初期化(lazy initialization)"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="koala" alt="koala" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f428.png?v8" height="20" width="20"> 遅延初期化(lazy initialization)</h1><ul><li>メソッドが呼ばれたときにはじめて初期化する</li></ul><pre class=" language-rb"><code class="language-rb">    def octkit_client      @octokit_client ||=        Octokit::Client.new(access_token: ENV['PERSONAL_ACCESS_TOKEN'])    end</code></pre><h1 id="tapメソッド"><a href="#tapメソッド" class="headerlink" title=" tapメソッド"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="beer" alt="beer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png?v8" height="20" width="20"> tapメソッド</h1><ul><li>なにもしない</li><li>全オブジェクトが使える</li></ul><pre class=" language-なにもしないtap.rb"><code class="language-なにもしないtap.rb">[1] pry(main)> 1.tap {|num| puts num}1=> 1[2] pry(main)> 1.tap {|num| 50}=> 1 </code></pre><h3 id="なにもしないtapを使ってクライアントの設定をする"><a href="#なにもしないtapを使ってクライアントの設定をする" class="headerlink" title=" なにもしないtapを使ってクライアントの設定をする"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> なにもしないtapを使ってクライアントの設定をする</h3><pre class=" language-rb"><code class="language-rb">    def octkit_client      @octokit_client ||=        Octokit::Client.new(access_token: ENV['PERSONAL_ACCESS_TOKEN']).tap do |c|          c.auto_paginate = true # ココ！        end    end</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する&lt;/p&gt;
+&lt;h1 id=&quot;リファクタリング&quot;&gt;&lt;a href=&quot;#リファクタリング&quot; class=&quot;headerlink&quot; title=&quot; リファクタリング&quot;&gt;&lt;/a&gt;&lt;img cla
+      
+    
+    </summary>
+    
+    
+      <category term="programming, ruby" scheme="http://risacan.github.io/tags/programming-ruby/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>KKEのこころえ</title>
+    <link href="http://risacan.github.io/KKE%E3%81%AE%E3%81%93%E3%81%93%E3%82%8D%E3%81%88/"/>
+    <id>http://risacan.github.io/KKEのこころえ/</id>
+    <published>2018-08-24T19:26:19.000Z</published>
+    <updated>2018-08-24T19:26:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2018/08/24/5683/ef970dfe-7138-4d34-8dba-f97ad65c3a6b.png" alt="export (1).png (190.5 kB)"></p><h1 id="KKEとは"><a href="#KKEとは" class="headerlink" title="KKEとは"></a>KKEとは</h1><p><strong>か</strong> しこい <strong>か</strong> わいい <strong>エ</strong> ンジニアの略<br>元ネタ: <a href="https://dic.pixiv.net/a/KKE" target="_blank" rel="noopener">KKE (かしこいかわいいえりーちか)とは【ピクシブ百科事典】</a></p><h1 id="ルール"><a href="#ルール" class="headerlink" title="ルール"></a>ルール</h1><ul><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20">  <strong>Whyを考えて指示通りに動かない</strong> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> </li><li>よくコードを読み、理解することに時間をかける</li><li>常に目の前の問題を単純化することに知恵を使う</li><li>エラーを恐れず、重要な情報として理解するために最小ケースを作る</li><li>問題の追跡のために明確な行動指針をたてる</li><li>道具の改善および自動化をおこなう</li><li>ボーイスカウトポリシー</li><li>何か始めるときは全体図を描いて必要な物を全部リストアップする</li></ul><h2 id="Pull-Request出す前に"><a href="#Pull-Request出す前に" class="headerlink" title="Pull Request出す前に "></a>Pull Request出す前に <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="point_up" alt="point_up" src="https://assets-cdn.github.com/images/icons/emoji/unicode/261d.png?v8" height="20" width="20"></h2><ul><li>Systemテストを一緒に書く</li><li>input系<ul><li>期待する文字列が入った場合</li><li>inputが空の場合</li></ul></li><li>メソッド名それで良いのか？それがそのメソッドにつける最高の名前なのか！？  :yubaba:</li><li>誤解を生まないPull Requestメッセージを書く</li></ul><h2 id="タスクをやる前に"><a href="#タスクをやる前に" class="headerlink" title="タスクをやる前に"></a>タスクをやる前に</h2><ul><li>全体の進め方を書いてみる</li><li>なにか考えがとっちらかったらメモに戻って軌道修正してから作業に移る</li><li>知らないgemや考え方が出てきたら最小単位で実験して理解する<ul><li>railsに入ってるgemをrails cで確認するのではなくてそのgem単体で試してみたり・・・</li></ul></li></ul><h1 id=""><a href="#" class="headerlink" title=""></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="books" alt="books" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4da.png?v8" height="20" width="20"></h1><ul><li><a href="https://qiita.com/hirokidaichi/items/27c757d92b6915e8ecf7" target="_blank" rel="noopener">ペアプログラミングして気がついた新人プログラマの成長を阻害する悪習</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2018/08/24/5683/ef970dfe-7138-4d34-8dba-f97ad65c3a6b.png&quot; alt=&quot;export (1
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>postgresからぬけだす方法</title>
+    <link href="http://risacan.github.io/postgres%E3%81%8B%E3%82%89%E3%81%AC%E3%81%91%E3%81%A0%E3%81%99%E6%96%B9%E6%B3%95/"/>
+    <id>http://risacan.github.io/postgresからぬけだす方法/</id>
+    <published>2018-08-15T10:52:00.000Z</published>
+    <updated>2018-08-15T10:52:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>\q</code> でpostgresのコンソールからぬけだせる。 <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="walking_woman" alt="walking_woman" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f6b6-2640.png?v8" height="20" width="20"><br><code>postgres=#</code> ではなくて <code>postgres-#</code> (イコールとハイフンの違いがある！) となって居るときは、control + c で一旦  <code>postgres=#</code>  にする。</p><pre class=" language-shell"><code class="language-shell">🌸 docker exec -it master_1 psql -U postgrespsql (10.4 (Debian 10.4-2.pgdg90+1))Type "help" for help.postgres=# help~省略~postgres=# quit 👈 間違えているpostgres-# .q 👈 =が-に・・・postgres-# qpostgres-# help 👈 慌ててhelpと入力するも複数行のうちの1行と思われてるpostgres-# help.postgres-# helppostgres-# exitpostgres-# quitpostgres-# ^C 👈 control + c に気づくpostgres=# quitpostgres-# ^Cpostgres=# help 👈 ようやくhelpを打てたYou are using psql, the command-line interface to PostgreSQL.Type:  \copyright for distribution terms       \h for help with SQL commands       \? for help with psql commands       \g or terminate with semicolon to execute query       \q to quitpostgres=# \q 👈 正しいquitコマンド</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;code&gt;\q&lt;/code&gt; でpostgresのコンソールからぬけだせる。 &lt;img class=&quot;github-emoji&quot; style=&quot;vertical-align:text-bottom;height:16px;width:16px&quot; title=&quot;walkin
+      
+    
+    </summary>
+    
+    
+      <category term="postgres" scheme="http://risacan.github.io/tags/postgres/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>間違ってbranchを消しちゃったときの対処法</title>
+    <link href="http://risacan.github.io/%E9%96%93%E9%81%95%E3%81%A3%E3%81%A6branch%E3%82%92%E6%B6%88%E3%81%97%E3%81%A1%E3%82%83%E3%81%A3%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%AE%E5%AF%BE%E5%87%A6%E6%B3%95/"/>
+    <id>http://risacan.github.io/間違ってbranchを消しちゃったときの対処法/</id>
+    <published>2018-06-10T01:27:40.000Z</published>
+    <updated>2018-06-10T01:27:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> branch -D add-new-featureDeleted branch add-new-feature <span class="token punctuation">(</span>was b9855a99<span class="token punctuation">)</span>.</code></pre><p>Remote RepositoryにPush前のbranchを消しちゃった <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="scream" alt="scream" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f631.png?v8" height="20" width="20"> ってとき・・・<br><code>Deleted branch add-new-feature (was b9855a99).</code> このメッセージがあればすぐに復元できる</p><pre class=" language-bash"><code class="language-bash">$ <span class="token function">git</span> checkout -b add-new-feature  b9855a99Switched to a new branch <span class="token string">'add-new-feature'</span></code></pre><p>よかった <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="relieved" alt="relieved" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60c.png?v8" height="20" width="20"> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="two_hearts" alt="two_hearts" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f495.png?v8" height="20" width="20"> </p><p>そして作業に戻ろう。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;pre class=&quot; language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;$ &lt;span class=&quot;token function&quot;&gt;git&lt;/span&gt; branch -D add-new-feature
+Deleted branch a
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://risacan.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GitHub Pagesで公開しているサイトを独自ドメインでHTTPS化する方法</title>
+    <link href="http://risacan.github.io/GitHub-Pages%E3%81%A7%E5%85%AC%E9%96%8B%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E7%8B%AC%E8%87%AA%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%A7HTTPS%E5%8C%96%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95/"/>
+    <id>http://risacan.github.io/GitHub-Pagesで公開しているサイトを独自ドメインでHTTPS化する方法/</id>
+    <published>2018-06-30T02:05:02.000Z</published>
+    <updated>2018-06-30T02:05:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2018/06/30/5683/31c75e4b-b9dd-4d7e-afdc-5abba96e1c74.png" alt="image.png (32.7 kB)"></p><p>GitHubには <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>  という機能があって、静的なサイトを無料で公開することができます。<br>このブログも、GitHub Pagesでホストしています。 <a href="https://github.com/risacan/risacan.github.io" target="_blank" rel="noopener">risacan/risacan.github.io</a></p><p>GitHub Pagesには独自ドメインを適用することができます。私はお名前.comで<code>risacan.net</code>というドメインを取得して、GitHub Pagesのドメインとして利用しています。</p><p>これまで、GitHub Pagesで独自ドメインを使う場合は、外部サービスを使って設定しない限りは http 通信のみの接続でした。しかし、最近になって、GitHub Pagesでホストしていて、独自ドメインでも、簡単に https 通信の設定ができるようになりました。その手順をメモしておきます。</p><p><a href="https://help.github.com/articles/troubleshooting-custom-domains/#https-errors" target="_blank" rel="noopener">Troubleshooting custom domains - User Documentation</a><br><img width="801" alt="スクリーンショット 2018-06-29 0.53.37.png (352.9 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/708ceea1-8a89-43d3-afd0-90ff0c305224.png"><br>https の通信設定をするためにはDNSの設定が必要だそうです。<br>以下のいずれかのIPをドメインのAレコードに登録する必要があります。</p><pre><code>185.199.108.153185.199.109.153185.199.110.153185.199.111.153</code></pre><p>さっそくお名前.comにアクセスして設定しましょう。<br>お名前.comめっちゃ見づらいのですが<a href="https://www.onamae.com/domain/navi/dns_manage/select" target="_blank" rel="noopener">どうにかしてドメインごとのDNS設定画面に移ります</a>。</p><p><img src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/8d88a79f-f8dd-4d11-9076-e974f41bec9b.png" alt="名称未設定.png (509.6 kB)"></p><p>そして指示どおりにレコードを更新します。<br><img width="778" alt="ドメインNavi-3.png (192.0 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/a18d0277-482d-497b-b2dd-0cb8f5572206.png"></p><p>ターミナルを開いて、dig コマンドで設定を確認できます。</p><pre><code>🌸 dig risacan.net; &lt;&lt;&gt;&gt; DiG 9.10.6 &lt;&lt;&gt;&gt; risacan.net;; global options: +cmd;; Got answer:;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 23203;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1;; OPT PSEUDOSECTION:; EDNS: version: 0, flags:; udp: 512;; QUESTION SECTION:;risacan.net.            IN    A;; ANSWER SECTION:risacan.net.        29    IN    A    185.199.108.153risacan.net.        29    IN    A    185.199.109.153;; Query time: 52 msec;; SERVER: 192.168.86.1#53(192.168.86.1);; WHEN: Fri Jun 29 00:44:26 JST 2018;; MSG SIZE  rcvd: 72</code></pre><p>うまく設定できてるっぽい <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="smiley" alt="smiley" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f603.png?v8" height="20" width="20"> </p><p>しかしながら、この時点で <code>https://risacan.net</code> にアクセスしても、エラーがでてしまいます<br><img width="337" alt="スクリーンショット 2018-06-29 0.47.21.png (19.0 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/2c083f9f-cf27-43bc-921b-0c173472cc35.png"></p><p>該当repositoryのSettings &gt; GitHub Pages &gt; Enforce HTTPSの欄をよく見ると、最大24時間、Certificationに時間かかるかもだから、待っててね〜とのこと。<br><img width="787" alt="スクリーンショット 2018-06-29 0.47.30.png (259.9 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/d0c0f8d9-38fe-480b-ae29-22753b1611f9.png"></p><p>しゃーなし、気軽に待つか〜と思いつつ何度かリフレッシュしたら、すぐ適用されました。<br><img width="281" alt="スクリーンショット 2018-06-29 0.53.16.png (17.7 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/31e64ce5-ca15-4dc9-9de8-969d551d151a.png"></p><p>Settingsの方にもチェックマークがついてる <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="white_check_mark" alt="white_check_mark" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2705.png?v8" height="20" width="20"><br><img width="790" alt="スクリーンショット 2018-06-29 0.52.16.png (232.8 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2018/06/29/5683/f1bb35ff-af09-4cc0-a886-cd27df63843d.png"></p><p>個人サイトもHTTPS化したし、ぐっすり眠れます <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sleeping" alt="sleeping" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f634.png?v8" height="20" width="20"> </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2018/06/30/5683/31c75e4b-b9dd-4d7e-afdc-5abba96e1c74.png&quot; alt=&quot;image.png
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Happy Birthday Ruby</title>
+    <link href="http://risacan.github.io/Happy-Birthday-Ruby/"/>
+    <id>http://risacan.github.io/Happy-Birthday-Ruby/</id>
+    <published>2018-02-24T14:01:47.000Z</published>
+    <updated>2018-02-24T14:01:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2018/02/24/5683/35ce3c19-5469-4739-a972-14ebb6a1c6d9.png" alt="image.png (51.9 kB)"></p><p>私とRubyとの出会いは新卒で入社した会社の開発部のOJTでした。RubyのGemの<a href="https://github.com/r7kamura/ruboty" target="_blank" rel="noopener">Ruboty</a>を使ってSlackのbotを実装するというのがOJTの課題でした。「お腹すいた〜」といったら「つ 🍠」といった感じにランダムに食べ物の絵文字を返すというのを実装して(※)、開発部の人たちに褒められてすごく嬉しかった。チェコ語専攻 == 文系 だったのもあり営業志望ということで入社したけど、開発部のOJTが忘れられなくて、清水の舞台から飛び降りる気持ちで、開発部に配属希望を出しました。その年は<a href="http://railsgirls.jp/" target="_blank" rel="noopener">Rails Girls</a>にも参加して、RubyistとあたたかいRubyコミュニティの存在を知りました。その後も勉強会に行ったり、Rails Girlsの発案者のLindaに会ったり、2人だけのRuby勉強会 <a href="https://medium.com/@risacan/ikejirirb-85196cea8265" target="_blank" rel="noopener">ikejiri.rb</a> をはじめたり・・・最初に出会った言語がRubyじゃなかったら、私はここまで変わってなかったかもしれない。Rubyとそのコミュニティのおかげで、プログラミングをはじめるのは全然怖くありませんでした。そして幸運なことに、今年Ruby on Railsでサービス開発している会社に入社しました。すばらしいメンバーに囲まれてRubyを書いています。まだまだ全然できないけど、できるようになるために毎日Rubyを書きます。Rubyありがとう、そして、おめでとう！</p><p>※ <a href="https://github.com/risacan/ruboty-snack" target="_blank" rel="noopener">risacan/ruboty-snack: Delivers food for you</a> Gemとして公開しました。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2018/02/24/5683/35ce3c19-5469-4739-a972-14ebb6a1c6d9.png&quot; alt=&quot;image.png
+      
+    
+    </summary>
+    
+    
+      <category term="Ruby25th" scheme="http://risacan.github.io/tags/Ruby25th/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Remove all docker containers and images</title>
+    <link href="http://risacan.github.io/Remove-all-docker-containers-and-images/"/>
+    <id>http://risacan.github.io/Remove-all-docker-containers-and-images/</id>
+    <published>2018-04-20T16:02:23.000Z</published>
+    <updated>2018-04-20T16:02:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="docker-container-全削除"><a href="#docker-container-全削除" class="headerlink" title="docker container 全削除"></a>docker container 全削除</h1><pre><code>docker rm `docker ps -a -q`</code></pre><h1 id="docker-image-全削除"><a href="#docker-image-全削除" class="headerlink" title="docker image 全削除"></a>docker image 全削除</h1><pre><code> docker rmi `docker images -q`</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;docker-container-全削除&quot;&gt;&lt;a href=&quot;#docker-container-全削除&quot; class=&quot;headerlink&quot; title=&quot;docker container 全削除&quot;&gt;&lt;/a&gt;docker container 全削除&lt;/h1&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="docker" scheme="http://risacan.github.io/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ikejirirb @ Google Telework Lounge</title>
+    <link href="http://risacan.github.io/ikejirirb-Google-Telework-Lounge/"/>
+    <id>http://risacan.github.io/ikejirirb-Google-Telework-Lounge/</id>
+    <published>2017-11-21T18:41:26.000Z</published>
+    <updated>2017-11-21T18:41:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/21/5683/28c06ac1-6570-46aa-b5b1-a18c0d1cbb7e.jpg" alt="DD9EFB56-A6F0-44C6-AFAB-1F3E3AC6F212.jpg (191.3 kB)"></p><p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/21/5683/c19ad903-96b7-40c2-a712-2ffb64ac1b5d.jpg" alt="791F1109-B45D-45E5-9409-9B202AC9DA94.jpg (476.7 kB)"></p><p>ikejirirb is a study group that consists of two ruby programmer @katorie and @risacan. We meet once a week to study programming. We have been making a gem for Ruboty (Hubot in Ruby basically)  this month. </p><p>We decided to meet at <a href="https://www.womenwill.com/japan/googletelework" target="_blank" rel="noopener">Google Telework Lounge</a> that opens for 1 month to promote telework. It’s free for charge including Wifi 🔊 and electricity 🔌 but not 🚽 (you have to go out of the place and go downstairs to <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="hankey" alt="hankey" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a9.png?v8" height="20" width="20"> ). There weren’t so crowded but  booth area was occupied by business people. So we sat at a big table in an opened area. </p><p>We tried pair programming, which is a programing technique that  two programmers work together in one computer.   👩 👩 💻 The result was brilliant. We were concentrated on programming (not chatting), gave feedbacks, shared the knowledge and found potential bugs before starting the program. Plus, we didn’t stop coding to think that much. We just started the program to see the result.  That might sound quite normal to veterans but the point is that the cycle of fixing code was so much faster than when I do it alone. <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="v" alt="v" src="https://assets-cdn.github.com/images/icons/emoji/unicode/270c.png?v8" height="20" width="20"> We had a huge progress!</p><p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/21/5683/b4c7110b-7ef1-4877-9504-ca97738e306c.JPG" alt="IMG_8172.JPG (830.1 kB)"><br>See the smile <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="smile" alt="smile" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f604.png?v8" height="20" width="20"> </p><p><strong>END</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2017/11/21/5683/28c06ac1-6570-46aa-b5b1-a18c0d1cbb7e.jpg&quot; alt=&quot;DD9EFB56-
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>unity1week Day7</title>
+    <link href="http://risacan.github.io/unity1week-Day7/"/>
+    <id>http://risacan.github.io/unity1week-Day7/</id>
+    <published>2017-11-20T13:47:00.000Z</published>
+    <updated>2017-11-20T13:47:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/19/5683/643da133-48fa-41bc-9f10-ae318d6eed9f.png" alt="background.png (40.1 kB)"></p><p><a href="https://unityroom.com/games/space-mame/webgl" target="_blank" rel="noopener">Space Mame | 無料ゲーム投稿サイト unityroom - Unityのゲームをアップロードして公開しよう</a></p><h1 id="What-I-did"><a href="#What-I-did" class="headerlink" title="What I did"></a>What I did</h1><ul><li>Add Start/Try Again Feature</li><li>Fix positions</li><li>Add Tweet button (It’s not working though …)</li><li>Export as WebGL</li><li>Upload to <a href="https://unityroom.com/" target="_blank" rel="noopener">unityroom</a> which is a website to share unity-made games with webGL</li><li>And tada <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="tada" alt="tada" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png?v8" height="20" width="20"> ! </li></ul><h1 id="Things-I-learned"><a href="#Things-I-learned" class="headerlink" title="Things I learned."></a>Things I learned.</h1><p>My first <a href="https://twitter.com/search?f=tweets&amp;vertical=default&amp;q=%23unity1week" target="_blank" rel="noopener">#unity1week </a> is over! There are many things to brush up but sometimes done is better than perfect. Here are the things I learned from #unity1week.</p><ul><li>Make START/RETRY/RESULT functions first.<ul><li>I made Start/Retry/Result feature on Sunday (the last day of unity1week). I wish I made these first because it is a basic feature for all games and I can reuse them as a template for other games.</li></ul></li><li>Make all function on the first day to leave time for level designing.<ul><li>I set the goal to make a game in 1 WEEK. So I spreaded the tasks over a week and that was a big mistake, because I didn’t have time for level desigining!  Level design is one of the most important thing in game creation. Even if the visual  is not fancy,  it can be fun to play when the level design is right. I really want to focus on it next time so that the player can be entertained.</li></ul></li><li>Play more games<ul><li>There are tons of games on  <a href="https://unityroom.com/" target="_blank" rel="noopener">unityroom</a>. I should have played more games to get inspired! <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sob" alt="sob" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f62d.png?v8" height="20" width="20"> </li></ul></li></ul><h1 id="Definitely-gonna-do-it-next-time"><a href="#Definitely-gonna-do-it-next-time" class="headerlink" title="Definitely  gonna do it next time!"></a>Definitely  gonna do it next time!</h1><p>Overall, I had a lot of fun! It’s fun to create and to see other games. The theme “Space” was abstract  this time so people interpreted  in various ways!  Check them out here <a href="https://unityroom.com/unity1weeks/7" target="_blank" rel="noopener">Unity 1週間ゲームジャム | 無料ゲーム投稿サイト unityroom - Unityのゲームをアップロードして公開しよう</a></p><p><strong>END</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2017/11/19/5683/643da133-48fa-41bc-9f10-ae318d6eed9f.png&quot; alt=&quot;backgroun
+      
+    
+    </summary>
+    
+    
+      <category term="unity" scheme="http://risacan.github.io/tags/unity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>unity1week Day3</title>
+    <link href="http://risacan.github.io/unity1week-Day3/"/>
+    <id>http://risacan.github.io/unity1week-Day3/</id>
+    <published>2017-11-16T01:55:11.000Z</published>
+    <updated>2017-11-16T01:55:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="What-I-did"><a href="#What-I-did" class="headerlink" title="What I did"></a>What I did</h1><p>Downloaded Unity 2017.2.0p1 personal from <a href="https://unity3d.com/jp/get-unity/download" target="_blank" rel="noopener">Unity - Download</a>. Then created a new 2D project with it.</p><h1 id="To-do-list"><a href="#To-do-list" class="headerlink" title="To do list"></a>To do list</h1><ul><li style="list-style: none"><input type="checkbox" checked> Put the block to make a road</li><li style="list-style: none"><input type="checkbox" checked> Create a circle ( which represents <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="dog2" alt="dog2" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f415.png?v8" height="20" width="20"> )</li><li style="list-style: none"><input type="checkbox" checked> Create rectangles ( which represents Windows )</li><li style="list-style: none"><input type="checkbox"> Change the color of one rectangle</li><li style="list-style: none"><input type="checkbox" checked> Add physics to <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="dog2" alt="dog2" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f415.png?v8" height="20" width="20"> so that it can jump</li></ul><h1 id="result"><a href="#result" class="headerlink" title="result"></a>result</h1><p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/16/5683/4303ce26-0633-4e76-a75a-9892fdd20f9a.gif" alt="11月-16-2017 01-39-15.gif (1.9 MB)"></p><p>This is aweful! <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sob" alt="sob" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f62d.png?v8" height="20" width="20"> I don’t know how working people manage to make time for unity1week.</p><h1 id=""><a href="#" class="headerlink" title=""></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="speech_balloon" alt="speech_balloon" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ac.png?v8" height="20" width="20"></h1><p>I’m so sleepy…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;What-I-did&quot;&gt;&lt;a href=&quot;#What-I-did&quot; class=&quot;headerlink&quot; title=&quot;What I did&quot;&gt;&lt;/a&gt;What I did&lt;/h1&gt;&lt;p&gt;Downloaded Unity 2017.2.0p1 personal f
+      
+    
+    </summary>
+    
+    
+      <category term="unity" scheme="http://risacan.github.io/tags/unity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>unity1week Day4</title>
+    <link href="http://risacan.github.io/unity1week-Day4/"/>
+    <id>http://risacan.github.io/unity1week-Day4/</id>
+    <published>2017-11-17T02:05:07.000Z</published>
+    <updated>2017-11-17T02:05:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/17/5683/6e4a8757-89fd-414f-9978-35ffa4794051.png" alt="mame.png (534.0 kB)"></p><h1 id="What-I-did"><a href="#What-I-did" class="headerlink" title="What I did"></a>What I did</h1><ul><li>Change the color of the target rectangle.</li><li>Draw some dogs.</li><li>Replace rectangles to those images.</li></ul><p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/17/5683/5cc8fcbe-e8df-4e81-8b90-cbfe6c55918c.gif" alt="cute.gif (2.6 MB)"></p><p>I was thinking about adding START/FINISH feature but decided to add images to keep myself motivated. And it worked! HOW CUTE THEY ARE! I forgot to draw spacesuits for the dog at the window ( which is my first original character in childhood ) but I don’t care. It’s cute.</p><h1 id="Drawing-tools"><a href="#Drawing-tools" class="headerlink" title="Drawing tools"></a>Drawing tools</h1><ul><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="notebook_with_decorative_cover" alt="notebook_with_decorative_cover" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4d4.png?v8" height="20" width="20"> &amp; <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="pen" alt="pen" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f58a.png?v8" height="20" width="20"> </li><li><a href="https://evernote.com/intl/jp/products/scannable" target="_blank" rel="noopener">Scannable | Evernote</a></li><li>Preview on Mac <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="computer" alt="computer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4bb.png?v8" height="20" width="20"> </li></ul><p>I just drew dogs on paper with Muji pen, scanned with Scannable, sent the image to Mac, edited with Preview and dragged the image into Unity.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://img.esa.io/uploads/production/attachments/2057/2017/11/17/5683/6e4a8757-89fd-414f-9978-35ffa4794051.png&quot; alt=&quot;mame.png 
+      
+    
+    </summary>
+    
+    
+      <category term="unity" scheme="http://risacan.github.io/tags/unity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>unity1week Day6</title>
+    <link href="http://risacan.github.io/unity1week-Day6/"/>
+    <id>http://risacan.github.io/unity1week-Day6/</id>
+    <published>2017-11-19T14:21:32.000Z</published>
+    <updated>2017-11-19T14:21:32.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="What-I-did"><a href="#What-I-did" class="headerlink" title="What I did"></a>What I did</h1><ul><li>Draw some button images for UI.</li></ul><p>and That is all <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sob" alt="sob" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f62d.png?v8" height="20" width="20"> </p><p><img src="https://img.esa.io/uploads/production/attachments/2057/2017/11/19/5683/e5e83dcf-bb53-4d9e-851c-485d4c7586e1.png" alt="background.png (24.3 kB)"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;What-I-did&quot;&gt;&lt;a href=&quot;#What-I-did&quot; class=&quot;headerlink&quot; title=&quot;What I did&quot;&gt;&lt;/a&gt;What I did&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;Draw some button images for UI.&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="unity" scheme="http://risacan.github.io/tags/unity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>unity1week Day2</title>
+    <link href="http://risacan.github.io/unity1week-Day2/"/>
+    <id>http://risacan.github.io/unity1week-Day2/</id>
+    <published>2017-11-15T18:26:58.000Z</published>
+    <updated>2017-11-15T18:26:58.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="What-is-unity1week"><a href="#What-is-unity1week" class="headerlink" title="What is unity1week ?"></a>What is <strong>unity1week</strong> ?</h1><p><a href="https://unityroom.com/unity1weeks" target="_blank" rel="noopener">Unity 1 week</a> is an one-week game jam. The theme comes out at Monday and you finish creating at Sunday at 20:00. Upload the game on the web with WebGL.</p><h1 id="Space"><a href="#Space" class="headerlink" title="Space"></a>Space</h1><p>“Space” is the theme for 11/13 ~ 11/19.</p><h1 id="My-Idea"><a href="#My-Idea" class="headerlink" title="My Idea"></a>My Idea</h1><p>This is my first time to join Unity 1 week so I decided to start with something I am familiar with, which is 2D. </p><p><img width="1005.1199999999999" alt="idea.png (1.8 MB)" src="https://img.esa.io/uploads/production/attachments/2057/2017/11/15/5683/3f5548d4-55d3-45df-9239-a3e57e222115.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;What-is-unity1week&quot;&gt;&lt;a href=&quot;#What-is-unity1week&quot; class=&quot;headerlink&quot; title=&quot;What is unity1week ?&quot;&gt;&lt;/a&gt;What is &lt;strong&gt;unity1week&lt;/st
+      
+    
+    </summary>
+    
+    
+      <category term="unity" scheme="http://risacan.github.io/tags/unity/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ikejiri.rb 4回目</title>
+    <link href="http://risacan.github.io/ikejirirb-part-4/"/>
+    <id>http://risacan.github.io/ikejirirb-part-4/</id>
+    <published>2017-03-24T13:39:03.000Z</published>
+    <updated>2017-03-24T13:39:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>※週一ランチタイムの読書会 <a href="https://github.com/ikejirirb/POODR" target="_blank" rel="noopener">ikejirirb/POODR</a></p><h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><p> 4.1 インターフェースを理解する 〜 4.3 パブリックインターフェースを見つける</p><h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul><li><p>p89</p><ul><li>問題の根源はクラスが「何をするか」ではなく、「何を明らかにするか」にある</li></ul></li><li><p>p 91</p><ul><li>パブリックインターフェース<ul><li>クラスの主要な責任を明らかにする</li><li>外部から実行される</li><li>気まぐれに変更されない</li><li>他社がそこに依存しても安全</li><li><strong>テストで完全に文書化されている</strong></li></ul></li><li>プライベートインターフェース<ul><li>実装の詳細に関わる</li><li>他のオブジェクトから送られてくることは想定されていない</li><li>どんな理由でも変更されうる</li><li>他者がそこに依存するのは危険</li><li><strong>テストでは言及されないことすらある</strong></li></ul></li><li>「変更の可能性が低いところに依存する」という考えはクラス「内」のメソッドにも当てはまる</li></ul></li><li>p 93<ul><li>アプリケーションに置いて「データ」「振る舞い」の両方を兼ね備えた「名詞」をあらわすものを「ドメインオブジェクト」</li><li>「ドメインオブジェクト」は大きくて目に見える現実世界のものを表し、かつ <strong>最終的にデーターベースに表されるもの</strong></li></ul></li><li><p>p93</p><ul><li>オブジェクトではなく、オブジェクト間でかわされるメッセージに注意を向ける</li></ul></li><li><p>p96</p><ul><li>ユースケースでの名詞はシーケンス図でオブジェクトになる</li><li>シーケンス図はオブジェクト間でかわされるメッセージを明記する</li></ul></li><li><p>p 97</p><ul><li>オブジェクトが存在するからメッセージを送るのではなく、メッセージを送るためにオブジェクトは存在する</li></ul></li><li><p>p98</p><ul><li><strong>「どのように」を伝えるのではなく、「何を」を頼む</strong></li></ul></li><li><p>p100</p><ul><li>図4.5と図4.6のちがい<ul><li>Mechanicのパブリックインターフェースのサイズが小さくなった</li><li>パブリックインターフェースが小さいということは、ほかのところから依存されるメソッドが少ないということ</li></ul></li><li>コンテキストは、Tripがどこへでも来て回るコートのこと</li><li>オブジェクトが要求するコンテキストはオブジェクトの再利用性の難しさに関わってくる</li><li>複雑なコンテクストをもつオブジェクトは使うのもテストするのも難しい</li><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="100" alt="100" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8" height="20" width="20"> オブジェクトがコンテキストから完全に独立していること</li><li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="100" alt="100" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8" height="20" width="20"> 相手が誰かも、何をするかも知らずに他のオブジェクトと共同作業できるオブジェクト<ul><li>dependency injection</li></ul></li></ul></li><li><p>p103 </p><ul><li>他のオブジェクトを信頼する</li></ul></li><li><p>p 104</p><ul><li>私は自分が何を望んでいるか知っていて、あなたが何をするかもしっているよ → 私は自分が何を望んでいるかを知っているし、あなたはあなたの担当部分をやってくれると信じてるよ</li><li>手放しの信頼</li></ul></li></ul><h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><ul><li>4章、まだまだ終わらない</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;※週一ランチタイムの読書会 &lt;a href=&quot;https://github.com/ikejirirb/POODR&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;ikejirirb/POODR&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;やったこと&quot;&gt;&lt;a href=
+      
+    
+    </summary>
+    
+    
+      <category term="poodr" scheme="http://risacan.github.io/tags/poodr/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java Scriptはシングルスレッド</title>
+    <link href="http://risacan.github.io/java-script-is-single-threaded/"/>
+    <id>http://risacan.github.io/java-script-is-single-threaded/</id>
+    <published>2016-10-14T23:05:47.000Z</published>
+    <updated>2016-10-14T23:05:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Java-Scriptはシングルスレッドである"><a href="#Java-Scriptはシングルスレッドである" class="headerlink" title="Java Scriptはシングルスレッドである"></a>Java Scriptはシングルスレッドである</h1><p>Java Scriptさんはたったひとりで仕事している（多摩川線のワンマン運転）</p><p>例題</p><pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>このスクリプトが実行される順番を予測して<code>console.log()</code>に数字を入れてみる <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="memo" alt="memo" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8" height="20" width="20"> </p><pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>私の予測があっていたら、1，2，3，4と順番に出力されるはず</p><p>実行してみる</p><pre class=" language-console"><code class="language-console">142Data Loaded: I got your request!3</code></pre><p><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="exclamation" alt="exclamation" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png?v8" height="20" width="20"> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="question" alt="question" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png?v8" height="20" width="20"> </p><h1 id="解説"><a href="#解説" class="headerlink" title="解説"></a>解説</h1><p>Java Scriptはシングルスレッドなので、裏でリクエスト送ったり、画面を描画したりのいろいろをひとりでやっている。重たい処理を先にやってしまうとその間他のことができないので画面が固まったりする。<br>効率的に処理するために、関数を読み込んだときに、サーバーへのリクエストなどの重たい処理は一旦キューに入れておく。その他の処理を先にやって、画面の描画をしたあとにキューに入れた処理に戻ってきて実行している。<br>先程のスクリプトだと実行の順番はこんな感じになる。</p><pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><h1 id="そのた"><a href="#そのた" class="headerlink" title="そのた"></a>そのた</h1><p>サーバーにリクエストおくってそのレスポンスの内容をつかってまたリクエストを送る、という処理をしたいとき、入れ子にするしかないという話もきいた。</p><pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>    $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre><p>入れ子がひどくならないように <code>Promise</code>とか<code>yield</code>を使うとか。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Java-Scriptはシングルスレッドである&quot;&gt;&lt;a href=&quot;#Java-Scriptはシングルスレッドである&quot; class=&quot;headerlink&quot; title=&quot;Java Scriptはシングルスレッドである&quot;&gt;&lt;/a&gt;Java Scriptはシングルス
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://risacan.github.io/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>rubotyのプラグイン作った</title>
+    <link href="http://risacan.github.io/made-a-plugin-for-ruboty/"/>
+    <id>http://risacan.github.io/made-a-plugin-for-ruboty/</id>
+    <published>2017-02-06T12:25:37.000Z</published>
+    <updated>2017-02-06T12:25:37.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://github.com/r7kamura/ruboty" target="_blank" rel="noopener">Ruboty</a>のplugin gemを作った〜！</p><h1 id="どんなgem"><a href="#どんなgem" class="headerlink" title="どんなgem"></a>どんなgem</h1><p><a href="https://github.com/risacan/ruboty-snack" target="_blank" rel="noopener">ruboty-snack</a><br>「お腹すいた」という言葉に反応してご飯系の絵文字を返してくれる。<br><img src="https://img.esa.io/uploads/production/attachments/2057/2016/11/05/5683/82872d0c-2e10-4d5f-ae44-c29f141272fc.gif" alt="ruboty-snack.gif (1.6 MB)"></p><p>以下、説明を書いたのだが、読みづらすぎるので、丁寧に書き直したい。<br>「理系の作文技術」を読み返そう、「数学文章作法」も読みたい。</p><h1 id="gemの作り方"><a href="#gemの作り方" class="headerlink" title="gemの作り方"></a>gemの作り方</h1><ol><li>gemの名前を決める</li><li><code>bundle gem</code>でgemの雛形を作る</li><li>gemspecを編集する</li><li>gemの中身を書く</li><li>gemのパッケージを作る</li><li>リリースする</li></ol><h1 id="名前を決める"><a href="#名前を決める" class="headerlink" title="名前を決める"></a>名前を決める</h1><p>まず、gemの名前をきめる。<br>rubygemsで名前がかぶっていないか確認する。<br>今回のgemは、Rubotyがおやつを投げてくれるので <code>ruboty-snack</code>にした。<img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="candy" alt="candy" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f36c.png?v8" height="20" width="20"></p><h1 id="bundle-gemする"><a href="#bundle-gemする" class="headerlink" title="bundle gemする"></a>bundle gemする</h1><p>gemの雛形をつくるために、 <code>bundle gem ruboty-snack</code> する。</p><pre class=" language-bash"><code class="language-bash">🌸 bundle gem ruboty-snack🌸 tree<span class="token keyword">.</span>└── ruboty-snack    ├── Gemfile    ├── LICENSE.txt    ├── README.md    ├── Rakefile    ├── bin    │   ├── console    │   └── setup    ├── lib    │   └── ruboty    │       ├── snack    │       │   └── version.rb    │       └── snack.rb    ├── ruboty-snack.gemspec    └── spec        ├── ruboty        │   └── snack_spec.rb        └── spec_helper.rb</code></pre><h1 id="gemspecを書く"><a href="#gemspecを書く" class="headerlink" title="gemspecを書く"></a>gemspecを書く</h1><p>生成された <code>ruboty-snack.gemspec</code> をひらいて、<code>TODO</code> と書かれている箇所を編集する。<br>gemを公開するなら以下の箇所は消す。</p><pre class=" language-ruby"><code class="language-ruby">  <span class="token comment" spellcheck="true"># Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'</span>  <span class="token comment" spellcheck="true"># to allow pushing to a single host or delete this section to allow pushing to any host.</span>  <span class="token keyword">if</span> spec<span class="token punctuation">.</span>respond_to<span class="token operator">?</span><span class="token punctuation">(</span><span class="token symbol">:metadata</span><span class="token punctuation">)</span>    spec<span class="token punctuation">.</span>metadata<span class="token punctuation">[</span><span class="token string">'allowed_push_host'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"TODO: Set to 'http://mygemserver.com'"</span>  <span class="token keyword">else</span>    <span class="token keyword">raise</span> <span class="token string">"RubyGems 2.0 or newer is required to protect against "</span> \      <span class="token string">"public gem pushes."</span>  <span class="token keyword">end</span></code></pre><p>rubotyのgemだったら、<code>spec.add_dependency &quot;ruboty&quot;</code> を書き忘れないようにする <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="point_up" alt="point_up" src="https://assets-cdn.github.com/images/icons/emoji/unicode/261d.png?v8" height="20" width="20"></p><h1 id="gemの中身を書く"><a href="#gemの中身を書く" class="headerlink" title="gemの中身を書く"></a>gemの中身を書く</h1><p>Rubotyのgemはディレクトリにお作法がある。<br>ハンドラーは<code>lib/ruboty/handlers/snack.rb</code> に記述する。<br><code>lib/ruboty/snack.rb</code> の中で、ハンドラーのファイルを <code>require</code> する。</p><h1 id="releaseする"><a href="#releaseする" class="headerlink" title="releaseする"></a>releaseする</h1><p>GitHubにディレクトリを作ってプッシュする。<br>rubygems.orgにアカウントを作っておく。<br><code>bundle exec rake build</code> すると、<code>.gem</code> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="package" alt="package" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4e6.png?v8" height="20" width="20"> を作ってくれる</p><p>最終的なディレクトリはこんな感じ</p><pre class=" language-bash"><code class="language-bash">🌸 tree<span class="token keyword">.</span>├── Gemfile├── Gemfile.lock├── LICENSE.txt├── README.md├── Rakefile├── bin│   ├── console│   └── setup├── lib│   └── ruboty│       ├── handlers│       │   └── snack.rb│       ├── snack│       │   └── version.rb│       └── snack.rb├── pkg│   └── ruboty-snack-0.1.0.gem├── ruboty-snack.gemspec└── spec    ├── ruboty    │   └── snack_spec.rb    └── spec_helper.rb</code></pre><p> <code>bundle exec rake release</code> する <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="tada" alt="tada" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png?v8" height="20" width="20"><br>何かを修正したら、<code>lib/ruboty/snack/versions.rb</code> でバージョン数を上げてコミットして、buildとreleaseすればおけ。</p><h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>はじめてgem releaseしたので嬉しかった！ <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="relaxed" alt="relaxed" src="https://assets-cdn.github.com/images/icons/emoji/unicode/263a.png?v8" height="20" width="20"><br>はじめてのPull Requestももらった！ <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="heart_eyes" alt="heart_eyes" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60d.png?v8" height="20" width="20"><br>このgemをつかって<a href="https://twitter.com/kombu_bot" target="_blank" rel="noopener">kombu_bot</a>を作ったらリアクションしてくれる人がいて嬉しい。pploggerの皆様、宣伝ありがとうございます。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;a href=&quot;https://github.com/r7kamura/ruboty&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Ruboty&lt;/a&gt;のplugin gemを作った〜！&lt;/p&gt;
+&lt;h1 id=&quot;どんなgem&quot;&gt;&lt;a href=&quot;#どんな
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>untracked fileもgit stashする</title>
+    <link href="http://risacan.github.io/git-stash-untracked-files/"/>
+    <id>http://risacan.github.io/git-stash-untracked-files/</id>
+    <published>2017-02-06T12:25:55.000Z</published>
+    <updated>2017-02-06T12:25:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><p>Rails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。<br>今朝masterブランチで作業してしまっていることに気づいたので、<code>git checkout -b hoge</code> として新しいブランチに移ろうと思ったら、変更があるのにコミットしてないファイルあるのでそれを移動させるかなんかしてからにしてねと言われてしまった。<br>こういうとき普段は <code>git stash</code> して変更を退避させてから <code>git checkout</code> でブランチを移動後、<code>git stash apply</code> するんだけど、できなかった</p><pre class=" language-bash"><code class="language-bash"><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> statusOn branch masterYour branch is up-to-date with <span class="token string">'origin/master'</span><span class="token keyword">.</span>Changes not staged <span class="token keyword">for</span> commit:  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to update what will be committed<span class="token punctuation">)</span>  <span class="token punctuation">(</span>use <span class="token string">"git checkout -- &lt;file>..."</span> to discard changes <span class="token keyword">in</span> working directory<span class="token punctuation">)</span>    modified:   db/schema.rbUntracked files:  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to include <span class="token keyword">in</span> what will be committed<span class="token punctuation">)</span>    app/models/user.rb    db/migrate/    test/fixtures/users.yml    test/models/user_test.rbno changes added to commit <span class="token punctuation">(</span>use <span class="token string">"git add"</span> and/or <span class="token string">"git commit -a"</span><span class="token punctuation">)</span><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> checkout -b modeling-users origin/modeling-userserror: The following untracked working tree files would be overwritten by checkout:    app/models/user.rb    test/fixtures/users.yml    test/models/user_test.rbPlease move or remove them before you switch branches.Aborting</code></pre><p><code>untracked files</code> があるのでブランチを移動できないと言われている。<br>直前に <code>rails db:migrate</code> というコマンドを使ったのだが、そのコマンドが新しいファイルを生成していて、そのファイルがuntracked なのでそのファイルをどけてねと言われてる。<br>こういうときは <code>git stash -u</code> を使うと、新規作成されてuntrackedなファイルもstashすることができる <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="bulb" alt="bulb" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png?v8" height="20" width="20"></p><pre class=" language-bash"><code class="language-bash"><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> stash -uSaved working directory and index state WIP on master: 7ec3f16 Merge pull request <span class="token comment" spellcheck="true">#15 from risacan/filling-in-layout</span>HEAD is now at 7ec3f16 Merge pull request <span class="token comment" spellcheck="true">#15 from risacan/filling-in-layout</span><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> checkout -b modeling-users origin/modeling-usersBranch modeling-users <span class="token keyword">set</span> up to track remote branch modeling-users from origin.Switched to a new branch <span class="token string">'modeling-users'</span><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> stash applyapp/models/user.rb already exists, no checkouttest/fixtures/users.yml already exists, no checkouttest/models/user_test.rb already exists, no checkoutCould not restore untracked files from stash</code></pre><h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul><li><code>git stash -u</code> 、 <a href="http://rubykaigi.org/2016/presentations/youchan.html" target="_blank" rel="noopener">Rubykaigi2016のyouchanさんのライブコーディング中</a>に登場して、おお便利そうと思っていた。今更だけど、使えて嬉しい。</li><li>こういうことを覚えている自分に驚く・・・</li></ul><h1 id="Thank-you"><a href="#Thank-you" class="headerlink" title="Thank you  "></a>Thank you  <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="kissing_smiling_eyes" alt="kissing_smiling_eyes" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f619.png?v8" height="20" width="20"></h1><ul><li><a href="http://qiita.com/muran001/items/f5746c518bf663f86a79" target="_blank" rel="noopener">gitで未追跡（untracked)なファイルもまとめて退避(stash)する</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;やったこと&quot;&gt;&lt;a href=&quot;#やったこと&quot; class=&quot;headerlink&quot; title=&quot;やったこと&quot;&gt;&lt;/a&gt;やったこと&lt;/h1&gt;&lt;p&gt;Rails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。&lt;br&gt;今朝masterブ
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://risacan.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>git add -pでも空白をハイライトする</title>
+    <link href="http://risacan.github.io/highlight-space-with-git-add-p/"/>
+    <id>http://risacan.github.io/highlight-space-with-git-add-p/</id>
+    <published>2016-10-11T11:28:18.000Z</published>
+    <updated>2016-10-11T11:28:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>git diffの場合は空白がハイライトされるけどgit add -pした場合は空白がハイライトされていなくて、そんなことないだろ〜とおもって、ぐぐったら設定が漏れていただけだった。</p><pre class=" language-bash"><code class="language-bash">$ brew upgrade <span class="token function">git</span>$ <span class="token function">git</span> --version<span class="token function">git</span> version 2.10.1$ <span class="token function">git</span> config --global interactive.diffFilter diff-highlight</code></pre><p><code>git config interactive.diffFilter diff-highlight</code> を実行すると、<code>git diff</code> 以外でも変更箇所がハイライトされるようになる。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;git diffの場合は空白がハイライトされるけどgit add -pした場合は空白がハイライトされていなくて、そんなことないだろ〜とおもって、ぐぐったら設定が漏れていただけだった。&lt;/p&gt;
+&lt;pre class=&quot; language-bash&quot;&gt;&lt;code class=&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>renewed github.io</title>
+    <link href="http://risacan.github.io/renewd-githubio-with-hexo/"/>
+    <id>http://risacan.github.io/renewd-githubio-with-hexo/</id>
+    <published>2017-11-07T02:01:25.000Z</published>
+    <updated>2017-11-07T02:01:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><ul><li><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>でgithub.ioを作り直した</li><li>前回のブログはデザインがひどかったので今回はもうちょっと気を使った</li><li>スタイルのフレームワークは<a href="http://tachyons.io/" target="_blank" rel="noopener">TACHYONS - Css Toolkit</a>を使ってみた</li></ul><h1 id="やりたいこと"><a href="#やりたいこと" class="headerlink" title="やりたいこと"></a>やりたいこと</h1><ul><li>werckerの設定</li><li>emojiを使えるようにする</li><li>snsボタンつける</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;やったこと&quot;&gt;&lt;a href=&quot;#やったこと&quot; class=&quot;headerlink&quot; title=&quot;やったこと&quot;&gt;&lt;/a&gt;やったこと&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noop
+      
+    
+    </summary>
+    
+    
+      <category term="github, hexo" scheme="http://risacan.github.io/tags/github-hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ShaveTheYak制作メモ</title>
+    <link href="http://risacan.github.io/shave-the-yak-memo-1/"/>
+    <id>http://risacan.github.io/shave-the-yak-memo-1/</id>
+    <published>2017-08-07T00:22:51.000Z</published>
+    <updated>2017-08-07T00:22:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><ul><li>SpriteKit</li><li>Yakの画像を表示させる</li><li>Shaverの画像が指を追いかけるようにする</li></ul><p><img width="487" alt="スクリーンショット 2017-08-07 0.21.53.png (406.2 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2017/08/07/5683/752a9886-9436-4159-9e7c-302aef115f8a.png"></p><h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul><li><a href="http://hajihaji-lemon.com/smartphone/swift/spritekit/" target="_blank" rel="noopener">[Swift] SpriteKitの基本. SKSceneにSKNodeを追加してゲーム画面を表示する | はじはじアプリ体験記</a></li><li><a href="http://www.t-tan.com/archives/781/" target="_blank" rel="noopener">SpriteKitでのノードの位置やサイズ指定（CGSizeとかCGPointとかCGRectとか） | Webシステム開発|ewalk|イウォーク | Webシステム開発|ewalk|イウォーク</a></li><li><a href="http://docs.fabo.io/swift/spritekit/015_spritekit.html" target="_blank" rel="noopener">015 タッチイベントを取得する · GitBook</a></li></ul><h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><ul><li>画像の編集は、ノートに無印のボールペンで書いて、<a href="https://evernote.com/intl/jp/products/scannable/" target="_blank" rel="noopener">Scannable | Evernote</a>でスキャン、Sketchでいろいろ頑張ると透過できる </li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;やったこと&quot;&gt;&lt;a href=&quot;#やったこと&quot; class=&quot;headerlink&quot; title=&quot;やったこと&quot;&gt;&lt;/a&gt;やったこと&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;SpriteKit&lt;/li&gt;
+&lt;li&gt;Yakの画像を表示させる&lt;/li&gt;
+&lt;li&gt;Shaverの画像が指
+      
+    
+    </summary>
+    
+      <category term="blog.risacan.net" scheme="http://risacan.github.io/categories/blog-risacan-net/"/>
+    
+    
+      <category term="shavetheyak, swift" scheme="http://risacan.github.io/tags/shavetheyak-swift/"/>
+    
+  </entry>
+  
+</feed>

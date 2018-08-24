@@ -1,0 +1,119 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>ikejiri.rb | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったことmemo🔑 Keywords 設計とは可変性を保つために技巧を凝らすこと  かんたんさの定義 変更は副作用をもたらさない 要件の変更が小さければコードの変更も小さい 既存のコードはかんたんに再利用できる 最もかんたんな変更方法はコードの追加 凝縮度 単一責任の原則 データではなく振る舞いに依存する データ（どこからでも参照され">
+<meta name="keywords" content="poodr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ikejiri.rb">
+<meta property="og:url" content="http://risacan.github.io/ikejirirb-902/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったことmemo🔑 Keywords 設計とは可変性を保つために技巧を凝らすこと  かんたんさの定義 変更は副作用をもたらさない 要件の変更が小さければコードの変更も小さい 既存のコードはかんたんに再利用できる 最もかんたんな変更方法はコードの追加 凝縮度 単一責任の原則 データではなく振る舞いに依存する データ（どこからでも参照され">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:updated_time" content="2017-03-23T22:41:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ikejiri.rb">
+<meta name="twitter:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったことmemo🔑 Keywords 設計とは可変性を保つために技巧を凝らすこと  かんたんさの定義 変更は副作用をもたらさない 要件の変更が小さければコードの変更も小さい 既存のコードはかんたんに再利用できる 最もかんたんな変更方法はコードの追加 凝縮度 単一責任の原則 データではなく振る舞いに依存する データ（どこからでも参照され">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">IKEJIRI.RB</h1>
+  
+    <span class="f6 blue">2017-03-23 22:41:03 Thursday</span>
+  
+  <div class="article-body"><p>※週一ランチタイムの読書会 <a href="https://github.com/ikejirirb/POODR" target="_blank" rel="noopener">ikejirirb/POODR</a></p>
+<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><h1 id="🔑-Keywords"><a href="#🔑-Keywords" class="headerlink" title="🔑 Keywords"></a>🔑 Keywords</h1><ul>
+<li>設計とは可変性を保つために技巧を凝らすこと</li>
+</ul>
+<h2 id="かんたんさの定義"><a href="#かんたんさの定義" class="headerlink" title="かんたんさの定義"></a>かんたんさの定義</h2><ul>
+<li>変更は副作用をもたらさない</li>
+<li>要件の変更が小さければコードの変更も小さい</li>
+<li>既存のコードはかんたんに再利用できる</li>
+<li>最もかんたんな変更方法はコードの追加</li>
+<li>凝縮度</li>
+<li><strong>単一責任の原則</strong></li>
+<li>データではなく振る舞いに依存する</li>
+<li>データ（どこからでも参照される）</li>
+<li>振る舞い（一箇所で定義される）</li>
+<li>変数にアクセスするようにするにはメッセージを送るようにしたほうがいい</li>
+</ul>
+<h2 id="TRUE"><a href="#TRUE" class="headerlink" title=" TRUE"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> TRUE</h2><ul>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> <strong>Transparent</strong><ul>
+<li>見通しが良い</li>
+</ul>
+</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> <strong>Reasonable</strong><ul>
+<li>合理的</li>
+</ul>
+</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> <strong>Usable</strong><ul>
+<li>利用性が高い</li>
+</ul>
+</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> <strong>Exemplary</strong> <ul>
+<li>模範的</li>
+</ul>
+</li>
+</ul>
+<h1 id="📝"><a href="#📝" class="headerlink" title="📝"></a>📝</h1><ul>
+<li>コグは歯車の歯のこと！ ⚙️ </li>
+<li>Exemplary <ul>
+<li>模範的</li>
+</ul>
+</li>
+</ul>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=ikejiri.rb%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

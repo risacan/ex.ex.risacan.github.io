@@ -1,0 +1,162 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>ikejiri.rb 4回目 | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと 4.1 インターフェースを理解する 〜 4.3 パブリックインターフェースを見つける memo p89  問題の根源はクラスが「何をするか」ではなく、「何を明らかにするか」にある   p 91  パブリックインターフェース クラスの主要な責任を明らかにする 外部から実行される 気まぐれに変更されない 他社がそこに依存しても安全">
+<meta name="keywords" content="poodr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ikejiri.rb 4回目">
+<meta property="og:url" content="http://risacan.github.io/ikejirirb-part-4/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと 4.1 インターフェースを理解する 〜 4.3 パブリックインターフェースを見つける memo p89  問題の根源はクラスが「何をするか」ではなく、「何を明らかにするか」にある   p 91  パブリックインターフェース クラスの主要な責任を明らかにする 外部から実行される 気まぐれに変更されない 他社がそこに依存しても安全">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8">
+<meta property="og:updated_time" content="2017-03-24T13:39:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ikejiri.rb 4回目">
+<meta name="twitter:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと 4.1 インターフェースを理解する 〜 4.3 パブリックインターフェースを見つける memo p89  問題の根源はクラスが「何をするか」ではなく、「何を明らかにするか」にある   p 91  パブリックインターフェース クラスの主要な責任を明らかにする 外部から実行される 気まぐれに変更されない 他社がそこに依存しても安全">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">IKEJIRI.RB 4回目</h1>
+  
+    <span class="f6 blue">2017-03-24 13:39:03 Friday</span>
+  
+  <div class="article-body"><p>※週一ランチタイムの読書会 <a href="https://github.com/ikejirirb/POODR" target="_blank" rel="noopener">ikejirirb/POODR</a></p>
+<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><p> 4.1 インターフェースを理解する 〜 4.3 パブリックインターフェースを見つける</p>
+<h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul>
+<li><p>p89</p>
+<ul>
+<li>問題の根源はクラスが「何をするか」ではなく、「何を明らかにするか」にある</li>
+</ul>
+</li>
+<li><p>p 91</p>
+<ul>
+<li>パブリックインターフェース<ul>
+<li>クラスの主要な責任を明らかにする</li>
+<li>外部から実行される</li>
+<li>気まぐれに変更されない</li>
+<li>他社がそこに依存しても安全</li>
+<li><strong>テストで完全に文書化されている</strong></li>
+</ul>
+</li>
+<li>プライベートインターフェース<ul>
+<li>実装の詳細に関わる</li>
+<li>他のオブジェクトから送られてくることは想定されていない</li>
+<li>どんな理由でも変更されうる</li>
+<li>他者がそこに依存するのは危険</li>
+<li><strong>テストでは言及されないことすらある</strong></li>
+</ul>
+</li>
+<li>「変更の可能性が低いところに依存する」という考えはクラス「内」のメソッドにも当てはまる</li>
+</ul>
+</li>
+<li>p 93<ul>
+<li>アプリケーションに置いて「データ」「振る舞い」の両方を兼ね備えた「名詞」をあらわすものを「ドメインオブジェクト」</li>
+<li>「ドメインオブジェクト」は大きくて目に見える現実世界のものを表し、かつ <strong>最終的にデーターベースに表されるもの</strong></li>
+</ul>
+</li>
+<li><p>p93</p>
+<ul>
+<li>オブジェクトではなく、オブジェクト間でかわされるメッセージに注意を向ける</li>
+</ul>
+</li>
+<li><p>p96</p>
+<ul>
+<li>ユースケースでの名詞はシーケンス図でオブジェクトになる</li>
+<li>シーケンス図はオブジェクト間でかわされるメッセージを明記する</li>
+</ul>
+</li>
+<li><p>p 97</p>
+<ul>
+<li>オブジェクトが存在するからメッセージを送るのではなく、メッセージを送るためにオブジェクトは存在する</li>
+</ul>
+</li>
+<li><p>p98</p>
+<ul>
+<li><strong>「どのように」を伝えるのではなく、「何を」を頼む</strong></li>
+</ul>
+</li>
+<li><p>p100</p>
+<ul>
+<li>図4.5と図4.6のちがい<ul>
+<li>Mechanicのパブリックインターフェースのサイズが小さくなった</li>
+<li>パブリックインターフェースが小さいということは、ほかのところから依存されるメソッドが少ないということ</li>
+</ul>
+</li>
+<li>コンテキストは、Tripがどこへでも来て回るコートのこと</li>
+<li>オブジェクトが要求するコンテキストはオブジェクトの再利用性の難しさに関わってくる</li>
+<li>複雑なコンテクストをもつオブジェクトは使うのもテストするのも難しい</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="100" alt="100" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8" height="20" width="20"> オブジェクトがコンテキストから完全に独立していること</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="100" alt="100" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4af.png?v8" height="20" width="20"> 相手が誰かも、何をするかも知らずに他のオブジェクトと共同作業できるオブジェクト<ul>
+<li>dependency injection</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>p103 </p>
+<ul>
+<li>他のオブジェクトを信頼する</li>
+</ul>
+</li>
+<li><p>p 104</p>
+<ul>
+<li>私は自分が何を望んでいるか知っていて、あなたが何をするかもしっているよ → 私は自分が何を望んでいるかを知っているし、あなたはあなたの担当部分をやってくれると信じてるよ</li>
+<li>手放しの信頼</li>
+</ul>
+</li>
+</ul>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><ul>
+<li>4章、まだまだ終わらない</li>
+</ul>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=ikejiri.rb 4回目%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

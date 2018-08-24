@@ -1,0 +1,123 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>untracked fileもgit stashする | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="やったことRails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。今朝masterブランチで作業してしまっていることに気づいたので、git checkout -b hoge として新しいブランチに移ろうと思ったら、変更があるのにコミットしてないファイルあるのでそれを移動させるかなんかしてからにしてねと言われてしまった。こういうとき普段は git stash して変">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="untracked fileもgit stashする">
+<meta property="og:url" content="http://risacan.github.io/git-stash-untracked-files/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="やったことRails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。今朝masterブランチで作業してしまっていることに気づいたので、git checkout -b hoge として新しいブランチに移ろうと思ったら、変更があるのにコミットしてないファイルあるのでそれを移動させるかなんかしてからにしてねと言われてしまった。こういうとき普段は git stash して変">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f619.png?v8">
+<meta property="og:updated_time" content="2017-02-06T12:25:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="untracked fileもgit stashする">
+<meta name="twitter:description" content="やったことRails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。今朝masterブランチで作業してしまっていることに気づいたので、git checkout -b hoge として新しいブランチに移ろうと思ったら、変更があるのにコミットしてないファイルあるのでそれを移動させるかなんかしてからにしてねと言われてしまった。こういうとき普段は git stash して変">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">UNTRACKED FILEもGIT STASHする</h1>
+  
+    <span class="f6 blue">2017-02-06 12:25:55 Monday</span>
+  
+  <div class="article-body"><h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><p>Rails tutorialをやるとき、章ごとにブランチを切って作業しすることにしている。<br>今朝masterブランチで作業してしまっていることに気づいたので、<code>git checkout -b hoge</code> として新しいブランチに移ろうと思ったら、変更があるのにコミットしてないファイルあるのでそれを移動させるかなんかしてからにしてねと言われてしまった。<br>こういうとき普段は <code>git stash</code> して変更を退避させてから <code>git checkout</code> でブランチを移動後、<code>git stash apply</code> するんだけど、できなかった</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> status
+On branch master
+Your branch is up-to-date with <span class="token string">'origin/master'</span><span class="token keyword">.</span>
+Changes not staged <span class="token keyword">for</span> commit:
+  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to update what will be committed<span class="token punctuation">)</span>
+  <span class="token punctuation">(</span>use <span class="token string">"git checkout -- &lt;file>..."</span> to discard changes <span class="token keyword">in</span> working directory<span class="token punctuation">)</span>
+
+    modified:   db/schema.rb
+
+Untracked files:
+  <span class="token punctuation">(</span>use <span class="token string">"git add &lt;file>..."</span> to include <span class="token keyword">in</span> what will be committed<span class="token punctuation">)</span>
+
+    app/models/user.rb
+    db/migrate/
+    test/fixtures/users.yml
+    test/models/user_test.rb
+
+no changes added to commit <span class="token punctuation">(</span>use <span class="token string">"git add"</span> and/or <span class="token string">"git commit -a"</span><span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> checkout -b modeling-users origin/modeling-users
+error: The following untracked working tree files would be overwritten by checkout:
+    app/models/user.rb
+    test/fixtures/users.yml
+    test/models/user_test.rb
+Please move or remove them before you switch branches.
+Aborting
+</code></pre>
+<p><code>untracked files</code> があるのでブランチを移動できないと言われている。<br>直前に <code>rails db:migrate</code> というコマンドを使ったのだが、そのコマンドが新しいファイルを生成していて、そのファイルがuntracked なのでそのファイルをどけてねと言われてる。<br>こういうときは <code>git stash -u</code> を使うと、新規作成されてuntrackedなファイルもstashすることができる <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="bulb" alt="bulb" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4a1.png?v8" height="20" width="20"></p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> stash -u
+Saved working directory and index state WIP on master: 7ec3f16 Merge pull request <span class="token comment" spellcheck="true">#15 from risacan/filling-in-layout</span>
+HEAD is now at 7ec3f16 Merge pull request <span class="token comment" spellcheck="true">#15 from risacan/filling-in-layout</span>
+<span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> checkout -b modeling-users origin/modeling-users
+Branch modeling-users <span class="token keyword">set</span> up to track remote branch modeling-users from origin.
+Switched to a new branch <span class="token string">'modeling-users'</span>
+<span class="token punctuation">(</span>・8・<span class="token punctuation">)</span> <span class="token function">git</span> stash apply
+app/models/user.rb already exists, no checkout
+test/fixtures/users.yml already exists, no checkout
+test/models/user_test.rb already exists, no checkout
+Could not restore untracked files from stash
+</code></pre>
+<h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul>
+<li><code>git stash -u</code> 、 <a href="http://rubykaigi.org/2016/presentations/youchan.html" target="_blank" rel="noopener">Rubykaigi2016のyouchanさんのライブコーディング中</a>に登場して、おお便利そうと思っていた。今更だけど、使えて嬉しい。</li>
+<li>こういうことを覚えている自分に驚く・・・</li>
+</ul>
+<h1 id="Thank-you"><a href="#Thank-you" class="headerlink" title="Thank you  "></a>Thank you  <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="kissing_smiling_eyes" alt="kissing_smiling_eyes" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f619.png?v8" height="20" width="20"></h1><ul>
+<li><a href="http://qiita.com/muran001/items/f5746c518bf663f86a79" target="_blank" rel="noopener">gitで未追跡（untracked)なファイルもまとめて退避(stash)する</a></li>
+</ul>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=untracked fileもgit stashする%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

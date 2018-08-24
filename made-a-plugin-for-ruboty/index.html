@@ -1,0 +1,155 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>rubotyのプラグイン作った | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="Rubotyのplugin gemを作った〜！ どんなgemruboty-snack「お腹すいた」という言葉に反応してご飯系の絵文字を返してくれる。 以下、説明を書いたのだが、読みづらすぎるので、丁寧に書き直したい。「理系の作文技術」を読み返そう、「数学文章作法」も読みたい。 gemの作り方 gemの名前を決める bundle gemでgemの雛形を作る gemspecを編集する gemの中身を書">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rubotyのプラグイン作った">
+<meta property="og:url" content="http://risacan.github.io/made-a-plugin-for-ruboty/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="Rubotyのplugin gemを作った〜！ どんなgemruboty-snack「お腹すいた」という言葉に反応してご飯系の絵文字を返してくれる。 以下、説明を書いたのだが、読みづらすぎるので、丁寧に書き直したい。「理系の作文技術」を読み返そう、「数学文章作法」も読みたい。 gemの作り方 gemの名前を決める bundle gemでgemの雛形を作る gemspecを編集する gemの中身を書">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://img.esa.io/uploads/production/attachments/2057/2016/11/05/5683/82872d0c-2e10-4d5f-ae44-c29f141272fc.gif">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f36c.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/261d.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4e6.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/263a.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60d.png?v8">
+<meta property="og:updated_time" content="2017-02-06T12:25:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rubotyのプラグイン作った">
+<meta name="twitter:description" content="Rubotyのplugin gemを作った〜！ どんなgemruboty-snack「お腹すいた」という言葉に反応してご飯系の絵文字を返してくれる。 以下、説明を書いたのだが、読みづらすぎるので、丁寧に書き直したい。「理系の作文技術」を読み返そう、「数学文章作法」も読みたい。 gemの作り方 gemの名前を決める bundle gemでgemの雛形を作る gemspecを編集する gemの中身を書">
+<meta name="twitter:image" content="https://img.esa.io/uploads/production/attachments/2057/2016/11/05/5683/82872d0c-2e10-4d5f-ae44-c29f141272fc.gif">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">RUBOTYのプラグイン作った</h1>
+  
+    <span class="f6 blue">2017-02-06 12:25:37 Monday</span>
+  
+  <div class="article-body"><p><a href="https://github.com/r7kamura/ruboty" target="_blank" rel="noopener">Ruboty</a>のplugin gemを作った〜！</p>
+<h1 id="どんなgem"><a href="#どんなgem" class="headerlink" title="どんなgem"></a>どんなgem</h1><p><a href="https://github.com/risacan/ruboty-snack" target="_blank" rel="noopener">ruboty-snack</a><br>「お腹すいた」という言葉に反応してご飯系の絵文字を返してくれる。<br><img src="https://img.esa.io/uploads/production/attachments/2057/2016/11/05/5683/82872d0c-2e10-4d5f-ae44-c29f141272fc.gif" alt="ruboty-snack.gif (1.6 MB)"></p>
+<p>以下、説明を書いたのだが、読みづらすぎるので、丁寧に書き直したい。<br>「理系の作文技術」を読み返そう、「数学文章作法」も読みたい。</p>
+<h1 id="gemの作り方"><a href="#gemの作り方" class="headerlink" title="gemの作り方"></a>gemの作り方</h1><ol>
+<li>gemの名前を決める</li>
+<li><code>bundle gem</code>でgemの雛形を作る</li>
+<li>gemspecを編集する</li>
+<li>gemの中身を書く</li>
+<li>gemのパッケージを作る</li>
+<li>リリースする</li>
+</ol>
+<h1 id="名前を決める"><a href="#名前を決める" class="headerlink" title="名前を決める"></a>名前を決める</h1><p>まず、gemの名前をきめる。<br>rubygemsで名前がかぶっていないか確認する。<br>今回のgemは、Rubotyがおやつを投げてくれるので <code>ruboty-snack</code>にした。<img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="candy" alt="candy" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f36c.png?v8" height="20" width="20"></p>
+<h1 id="bundle-gemする"><a href="#bundle-gemする" class="headerlink" title="bundle gemする"></a>bundle gemする</h1><p>gemの雛形をつくるために、 <code>bundle gem ruboty-snack</code> する。</p>
+<pre class=" language-bash"><code class="language-bash">🌸 bundle gem ruboty-snack
+🌸 tree
+<span class="token keyword">.</span>
+└── ruboty-snack
+    ├── Gemfile
+    ├── LICENSE.txt
+    ├── README.md
+    ├── Rakefile
+    ├── bin
+    │   ├── console
+    │   └── setup
+    ├── lib
+    │   └── ruboty
+    │       ├── snack
+    │       │   └── version.rb
+    │       └── snack.rb
+    ├── ruboty-snack.gemspec
+    └── spec
+        ├── ruboty
+        │   └── snack_spec.rb
+        └── spec_helper.rb
+</code></pre>
+<h1 id="gemspecを書く"><a href="#gemspecを書く" class="headerlink" title="gemspecを書く"></a>gemspecを書く</h1><p>生成された <code>ruboty-snack.gemspec</code> をひらいて、<code>TODO</code> と書かれている箇所を編集する。<br>gemを公開するなら以下の箇所は消す。</p>
+<pre class=" language-ruby"><code class="language-ruby">  <span class="token comment" spellcheck="true"># Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'</span>
+  <span class="token comment" spellcheck="true"># to allow pushing to a single host or delete this section to allow pushing to any host.</span>
+  <span class="token keyword">if</span> spec<span class="token punctuation">.</span>respond_to<span class="token operator">?</span><span class="token punctuation">(</span><span class="token symbol">:metadata</span><span class="token punctuation">)</span>
+    spec<span class="token punctuation">.</span>metadata<span class="token punctuation">[</span><span class="token string">'allowed_push_host'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">"TODO: Set to 'http://mygemserver.com'"</span>
+  <span class="token keyword">else</span>
+    <span class="token keyword">raise</span> <span class="token string">"RubyGems 2.0 or newer is required to protect against "</span> \
+      <span class="token string">"public gem pushes."</span>
+  <span class="token keyword">end</span>
+</code></pre>
+<p>rubotyのgemだったら、<code>spec.add_dependency &quot;ruboty&quot;</code> を書き忘れないようにする <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="point_up" alt="point_up" src="https://assets-cdn.github.com/images/icons/emoji/unicode/261d.png?v8" height="20" width="20"></p>
+<h1 id="gemの中身を書く"><a href="#gemの中身を書く" class="headerlink" title="gemの中身を書く"></a>gemの中身を書く</h1><p>Rubotyのgemはディレクトリにお作法がある。<br>ハンドラーは<code>lib/ruboty/handlers/snack.rb</code> に記述する。<br><code>lib/ruboty/snack.rb</code> の中で、ハンドラーのファイルを <code>require</code> する。</p>
+<h1 id="releaseする"><a href="#releaseする" class="headerlink" title="releaseする"></a>releaseする</h1><p>GitHubにディレクトリを作ってプッシュする。<br>rubygems.orgにアカウントを作っておく。<br><code>bundle exec rake build</code> すると、<code>.gem</code> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="package" alt="package" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4e6.png?v8" height="20" width="20"> を作ってくれる</p>
+<p>最終的なディレクトリはこんな感じ</p>
+<pre class=" language-bash"><code class="language-bash">🌸 tree
+<span class="token keyword">.</span>
+├── Gemfile
+├── Gemfile.lock
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── bin
+│   ├── console
+│   └── setup
+├── lib
+│   └── ruboty
+│       ├── handlers
+│       │   └── snack.rb
+│       ├── snack
+│       │   └── version.rb
+│       └── snack.rb
+├── pkg
+│   └── ruboty-snack-0.1.0.gem
+├── ruboty-snack.gemspec
+└── spec
+    ├── ruboty
+    │   └── snack_spec.rb
+    └── spec_helper.rb
+</code></pre>
+<p> <code>bundle exec rake release</code> する <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="tada" alt="tada" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f389.png?v8" height="20" width="20"><br>何かを修正したら、<code>lib/ruboty/snack/versions.rb</code> でバージョン数を上げてコミットして、buildとreleaseすればおけ。</p>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>はじめてgem releaseしたので嬉しかった！ <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="relaxed" alt="relaxed" src="https://assets-cdn.github.com/images/icons/emoji/unicode/263a.png?v8" height="20" width="20"><br>はじめてのPull Requestももらった！ <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="heart_eyes" alt="heart_eyes" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60d.png?v8" height="20" width="20"><br>このgemをつかって<a href="https://twitter.com/kombu_bot" target="_blank" rel="noopener">kombu_bot</a>を作ったらリアクションしてくれる人がいて嬉しい。pploggerの皆様、宣伝ありがとうございます。</p>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=rubotyのプラグイン作った%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

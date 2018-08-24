@@ -1,0 +1,79 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Visual Studio CodeからのコミットにもGPGの署名をする | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="やったこと~/.gnupg/gpg.conf ファイルの一番下に “no-tty”て書く https://github.com/Microsoft/vscode/issues/5065#issuecomment-207960831 echo &amp;#39;no-tty&amp;#39; &amp;gt;&amp;gt; ~/.gnupg/gpg.conf 困ってたコミットにGPG(GNU Privacy Guard - Wi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Visual Studio CodeからのコミットにもGPGの署名をする">
+<meta property="og:url" content="http://risacan.github.io/use-gpg-sign-with-vscode/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="やったこと~/.gnupg/gpg.conf ファイルの一番下に “no-tty”て書く https://github.com/Microsoft/vscode/issues/5065#issuecomment-207960831 echo &amp;#39;no-tty&amp;#39; &amp;gt;&amp;gt; ~/.gnupg/gpg.conf 困ってたコミットにGPG(GNU Privacy Guard - Wi">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://img.esa.io/uploads/production/attachments/2057/2017/07/01/5683/c12a92bb-b403-42da-ab77-c50788c099ee.png">
+<meta property="og:updated_time" content="2017-07-01T20:02:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Visual Studio CodeからのコミットにもGPGの署名をする">
+<meta name="twitter:description" content="やったこと~/.gnupg/gpg.conf ファイルの一番下に “no-tty”て書く https://github.com/Microsoft/vscode/issues/5065#issuecomment-207960831 echo &amp;#39;no-tty&amp;#39; &amp;gt;&amp;gt; ~/.gnupg/gpg.conf 困ってたコミットにGPG(GNU Privacy Guard - Wi">
+<meta name="twitter:image" content="https://img.esa.io/uploads/production/attachments/2057/2017/07/01/5683/c12a92bb-b403-42da-ab77-c50788c099ee.png">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">VISUAL STUDIO CODEからのコミットにもGPGの署名をする</h1>
+  
+    <span class="f6 blue">2017-07-01 20:02:36 Saturday</span>
+  
+  <div class="article-body"><h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><p><code>~/.gnupg/gpg.conf</code> ファイルの一番下に “no-tty”て書く</p>
+<p><a href="https://github.com/Microsoft/vscode/issues/5065#issuecomment-207960831" target="_blank" rel="noopener">https://github.com/Microsoft/vscode/issues/5065#issuecomment-207960831</a></p>
+<pre><code>echo &#39;no-tty&#39; &gt;&gt; ~/.gnupg/gpg.conf
+</code></pre><h1 id="困ってた"><a href="#困ってた" class="headerlink" title="困ってた"></a>困ってた</h1><p>コミットにGPG(<a href="https://ja.wikipedia.org/wiki/GNU_Privacy_Guard" target="_blank" rel="noopener">GNU Privacy Guard - Wikipedia</a>)署名してGitHubにプッシュするとVerifyマークつくのでやってました</p>
+<p><img width="1129" alt="スクリーンショット 2017-07-01 19.56.07.png (69.4 kB)" src="https://img.esa.io/uploads/production/attachments/2057/2017/07/01/5683/c12a92bb-b403-42da-ab77-c50788c099ee.png"></p>
+<p>ところが、VS Code (Visual Studio Code) のコミットを使うとなんか変なエラーでてコミットできなかったんです。これの解決法がみつからなくてコミットはつねにコンソールからやっていたのですが、VS<br> Codeのコミット機能がわかりやすくてシンプルで好きなのでもういっかい解決法を探してみたら見つかりましたー！<br>わーい</p>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=Visual Studio CodeからのコミットにもGPGの署名をする%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

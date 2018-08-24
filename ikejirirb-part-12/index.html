@@ -1,0 +1,151 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>ikejirirb 12回目 | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと p237 ~ p263 第9章費用対効果の高いテストを設計する ~ 9.2 受信メッセージをテストする  memo p237  変更可能性こそが設計時に唯一問題と鳴る指標です。 リファクタリングとは、ソフトウェアの外部の振る舞いを保ったままで、内部の構造を改善していく作業を指します   p238  リファクタリングでは新たな振">
+<meta name="keywords" content="poodr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ikejirirb 12回目">
+<meta property="og:url" content="http://risacan.github.io/ikejirirb-part-12/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと p237 ~ p263 第9章費用対効果の高いテストを設計する ~ 9.2 受信メッセージをテストする  memo p237  変更可能性こそが設計時に唯一問題と鳴る指標です。 リファクタリングとは、ソフトウェアの外部の振る舞いを保ったままで、内部の構造を改善していく作業を指します   p238  リファクタリングでは新たな振">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f980.png?v8">
+<meta property="og:updated_time" content="2017-06-01T14:41:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ikejirirb 12回目">
+<meta name="twitter:description" content="※週一ランチタイムの読書会 ikejirirb/POODR やったこと p237 ~ p263 第9章費用対効果の高いテストを設計する ~ 9.2 受信メッセージをテストする  memo p237  変更可能性こそが設計時に唯一問題と鳴る指標です。 リファクタリングとは、ソフトウェアの外部の振る舞いを保ったままで、内部の構造を改善していく作業を指します   p238  リファクタリングでは新たな振">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f980.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">IKEJIRIRB 12回目</h1>
+  
+    <span class="f6 blue">2017-06-01 14:41:57 Thursday</span>
+  
+  <div class="article-body"><p>※週一ランチタイムの読書会 <a href="https://github.com/ikejirirb/POODR" target="_blank" rel="noopener">ikejirirb/POODR</a></p>
+<h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><ul>
+<li>p237 ~ p263</li>
+<li>第9章費用対効果の高いテストを設計する ~ 9.2 受信メッセージをテストする</li>
+</ul>
+<h1 id="memo"><a href="#memo" class="headerlink" title="memo"></a>memo</h1><ul>
+<li><p>p237</p>
+<ul>
+<li>変更可能性こそが設計時に唯一問題と鳴る指標です。</li>
+<li>リファクタリングとは、ソフトウェアの外部の振る舞いを保ったままで、内部の構造を改善していく作業を指します</li>
+</ul>
+</li>
+<li><p>p238</p>
+<ul>
+<li>リファクタリングでは新たな振る舞いを追加することはない</li>
+<li>リファクタリングは小さくカニのような歩みでインクリメンタルに慎重にコードを変えていく厳密なプロセス <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="crab" alt="crab" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f980.png?v8" height="20" width="20"></li>
+<li>変更可能なコードを書くためには、価値の高いテストを書く能力が求められる</li>
+<li>テストの真の目的はコストの削減</li>
+</ul>
+</li>
+<li><p>p239</p>
+<ul>
+<li>テストにコストが掛かることの解決方法は、テストをやめることではなく、テストを書くのをうまくなること</li>
+<li>できることを初期段階で知ることは将来利用可能は設計の選択肢をかえるために、他の案を選択し直すきっかけになる</li>
+<li><strong>テストは唯一信頼できる設計の仕様書になる</strong></li>
+<li><strong>将来の自分は記憶喪失になっているとでも思ってテストを書こう</strong></li>
+</ul>
+</li>
+<li><p>p240</p>
+<ul>
+<li>具体的なケースを単一の抽象として扱うコードによって、いつか報われるときが来ることは知っているものの、現時点ではその抽象がどんなものになるか予測するための十分な情報がない</li>
+<li>意図的にインターフェースに依存することに寄って、テストを使い、設計の決定を安全に代償もなく遅らせることができる</li>
+</ul>
+</li>
+<li><p>p240</p>
+<ul>
+<li>良い設計は自然と抽象に依存する独立した小さなObjectの集まりになる</li>
+</ul>
+</li>
+<li><p>p241</p>
+<ul>
+<li>コードベースが拡大し幾つもの抽象が育っていくと、テストの重要性も一層ましていく</li>
+<li>テストを書くのが大変なのであれば、他のObjectから見ても再利用が難しい</li>
+<li>テストにコストがかかるカロ言って、必ずしもアプリの設計がまずいわけではない</li>
+</ul>
+</li>
+<li><p>p243</p>
+<ul>
+<li>一般規則として、Objectは、自信のパブリックインターフェースを構成するメッセージにたいしてのみ、状態についての表明を行うべき</li>
+</ul>
+</li>
+<li><p>p244</p>
+<ul>
+<li>このような送信メッセージはクエリ（質問）として知られていて、送りてのObjectでテストされる必要はない</li>
+<li>受信メッセージは、その戻り値の状態がテストされるべき</li>
+</ul>
+</li>
+<li><p>p245</p>
+<ul>
+<li>テストの価値を信じ続けることが大事</li>
+</ul>
+</li>
+<li><p>p246</p>
+<ul>
+<li>経験を積んだ設計者は、問題に対し「スパイクを打つ」ということを知っている</li>
+</ul>
+</li>
+<li><p>p251</p>
+<ul>
+<li>依存されていない、使われていないコードが見つかったら削除する</li>
+</ul>
+</li>
+</ul>
+<h1 id="所感"><a href="#所感" class="headerlink" title="所感"></a>所感</h1><blockquote>
+<p><strong>将来の自分は記憶喪失になっているとでも思ってテストを書こう</strong></p>
+</blockquote>
+<p>ハイ！</p>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=ikejirirb 12回目%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

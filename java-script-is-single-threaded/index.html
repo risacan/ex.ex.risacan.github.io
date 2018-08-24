@@ -1,0 +1,141 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>Java Scriptはシングルスレッド | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="Java ScriptはシングルスレッドであるJava Scriptさんはたったひとりで仕事している（多摩川線のワンマン運転） 例題 function loadData() {   console.log();    $.get(&quot;/&quot;, function (data) {     console.log();     console.log(&quot;Data Loaded: &quot; + data);">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Scriptはシングルスレッド">
+<meta property="og:url" content="http://risacan.github.io/java-script-is-single-threaded/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="Java ScriptはシングルスレッドであるJava Scriptさんはたったひとりで仕事している（多摩川線のワンマン運転） 例題 function loadData() {   console.log();    $.get(&quot;/&quot;, function (data) {     console.log();     console.log(&quot;Data Loaded: &quot; + data);">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png?v8">
+<meta property="og:updated_time" content="2016-10-14T23:05:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java Scriptはシングルスレッド">
+<meta name="twitter:description" content="Java ScriptはシングルスレッドであるJava Scriptさんはたったひとりで仕事している（多摩川線のワンマン運転） 例題 function loadData() {   console.log();    $.get(&quot;/&quot;, function (data) {     console.log();     console.log(&quot;Data Loaded: &quot; + data);">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">JAVA SCRIPTはシングルスレッド</h1>
+  
+    <span class="f6 blue">2016-10-14 23:05:47 Friday</span>
+  
+  <div class="article-body"><h1 id="Java-Scriptはシングルスレッドである"><a href="#Java-Scriptはシングルスレッドである" class="headerlink" title="Java Scriptはシングルスレッドである"></a>Java Scriptはシングルスレッドである</h1><p>Java Scriptさんはたったひとりで仕事している（多摩川線のワンマン運転）</p>
+<p>例題</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>このスクリプトが実行される順番を予測して<code>console.log()</code>に数字を入れてみる <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="memo" alt="memo" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8" height="20" width="20"> </p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>私の予測があっていたら、1，2，3，4と順番に出力されるはず</p>
+<p>実行してみる</p>
+<pre class=" language-console"><code class="language-console">1
+4
+2
+Data Loaded: I got your request!
+3
+</code></pre>
+<p><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="exclamation" alt="exclamation" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2757.png?v8" height="20" width="20"> <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="question" alt="question" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2753.png?v8" height="20" width="20"> </p>
+<h1 id="解説"><a href="#解説" class="headerlink" title="解説"></a>解説</h1><p>Java Scriptはシングルスレッドなので、裏でリクエスト送ったり、画面を描画したりのいろいろをひとりでやっている。重たい処理を先にやってしまうとその間他のことができないので画面が固まったりする。<br>効率的に処理するために、関数を読み込んだときに、サーバーへのリクエストなどの重たい処理は一旦キューに入れておく。その他の処理を先にやって、画面の描画をしたあとにキューに入れた処理に戻ってきて実行している。<br>先程のスクリプトだと実行の順番はこんな感じになる。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h1 id="そのた"><a href="#そのた" class="headerlink" title="そのた"></a>そのた</h1><p>サーバーにリクエストおくってそのレスポンスの内容をつかってまたリクエストを送る、という処理をしたいとき、入れ子にするしかないという話もきいた。</p>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    $<span class="token punctuation">.</span><span class="token keyword">get</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">,</span> data<span class="token punctuation">,</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>data<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Data Loaded: "</span> <span class="token operator">+</span> data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">loadData</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>入れ子がひどくならないように <code>Promise</code>とか<code>yield</code>を使うとか。</p>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=Java Scriptはシングルスレッド%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

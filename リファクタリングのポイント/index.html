@@ -1,0 +1,145 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>リファクタリングのポイント | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する  リファクタリング 機能を変えずに良くすること   リファクタリングをする理由  読みやすくする  バグを減らす  テストしやすくする   短くする(かんちがいしないこと！)   1つのメソッドは1つの動作 1つのクラスは1つの責務 メソッドはアルファベット順に並べる tapメソッド   なまえ 単数と複数">
+<meta name="keywords" content="programming, ruby">
+<meta property="og:type" content="article">
+<meta property="og:title" content="リファクタリングのポイント">
+<meta property="og:url" content="http://risacan.github.io/リファクタリングのポイント/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する  リファクタリング 機能を変えずに良くすること   リファクタリングをする理由  読みやすくする  バグを減らす  テストしやすくする   短くする(かんちがいしないこと！)   1つのメソッドは1つの動作 1つのクラスは1つの責務 メソッドはアルファベット順に並べる tapメソッド   なまえ 単数と複数">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3a8.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ad.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/274c.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4db.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f648.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f428.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png?v8">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8">
+<meta property="og:updated_time" content="2018-06-09T20:41:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="リファクタリングのポイント">
+<meta name="twitter:description" content="新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する  リファクタリング 機能を変えずに良くすること   リファクタリングをする理由  読みやすくする  バグを減らす  テストしやすくする   短くする(かんちがいしないこと！)   1つのメソッドは1つの動作 1つのクラスは1つの責務 メソッドはアルファベット順に並べる tapメソッド   なまえ 単数と複数">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3a8.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">リファクタリングのポイント</h1>
+  
+    <span class="f6 blue">2018-06-09 20:41:03 Saturday</span>
+  
+  <div class="article-body"><p>新卒のときにチューターにリファクタリングしてもらったときの有用なメモがでてきたので公開する</p>
+<h1 id="リファクタリング"><a href="#リファクタリング" class="headerlink" title=" リファクタリング"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="art" alt="art" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f3a8.png?v8" height="20" width="20"> リファクタリング</h1><ul>
+<li>機能を変えずに良くすること</li>
+</ul>
+<h1 id="リファクタリングをする理由"><a href="#リファクタリングをする理由" class="headerlink" title=" リファクタリングをする理由"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="thought_balloon" alt="thought_balloon" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4ad.png?v8" height="20" width="20"> リファクタリングをする理由</h1><ul>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> 読みやすくする</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> バグを減らす</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="o" alt="o" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2b55.png?v8" height="20" width="20"> テストしやすくする</li>
+<li><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="x" alt="x" src="https://assets-cdn.github.com/images/icons/emoji/unicode/274c.png?v8" height="20" width="20">  短くする(かんちがいしないこと！)</li>
+</ul>
+<h1 id=""><a href="#" class="headerlink" title=""></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="memo" alt="memo" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4dd.png?v8" height="20" width="20"></h1><ul>
+<li>1つのメソッドは1つの動作</li>
+<li>1つのクラスは1つの責務</li>
+<li>メソッドはアルファベット順に並べる</li>
+<li>tapメソッド</li>
+</ul>
+<h1 id="なまえ"><a href="#なまえ" class="headerlink" title=" なまえ"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="name_badge" alt="name_badge" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f4db.png?v8" height="20" width="20"> なまえ</h1><ul>
+<li>単数と複数を使い分ける</li>
+<li>変数は名詞にする</li>
+<li>メソッド名は基本動詞にする</li>
+</ul>
+<h2 id="なまえの例"><a href="#なまえの例" class="headerlink" title="なまえの例"></a>なまえの例</h2><pre class=" language-rb"><code class="language-rb"># organizations_members
+org_members = @client.org_members('snowhalation')
+list_members = org_members.map { |mem| mem[:login] }
+</code></pre>
+<ul>
+<li>list_membersは結局配列になる。</li>
+<li>動詞だとメソッドみたいにみえる</li>
+<li>members_listという名詞にする</li>
+</ul>
+<pre class=" language-rb"><code class="language-rb">members_list = org_members.map { |mem| mem[:login] }
+</code></pre>
+<h1 id="private"><a href="#private" class="headerlink" title=" private"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="see_no_evil" alt="see_no_evil" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f648.png?v8" height="20" width="20"> private</h1><ul>
+<li>外から呼ばないメソッドはprivateメソッドにする</li>
+</ul>
+<h1 id="遅延初期化-lazy-initialization"><a href="#遅延初期化-lazy-initialization" class="headerlink" title=" 遅延初期化(lazy initialization)"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="koala" alt="koala" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f428.png?v8" height="20" width="20"> 遅延初期化(lazy initialization)</h1><ul>
+<li>メソッドが呼ばれたときにはじめて初期化する</li>
+</ul>
+<pre class=" language-rb"><code class="language-rb">    def octkit_client
+      @octokit_client ||=
+        Octokit::Client.new(access_token: ENV['PERSONAL_ACCESS_TOKEN'])
+    end
+</code></pre>
+<h1 id="tapメソッド"><a href="#tapメソッド" class="headerlink" title=" tapメソッド"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="beer" alt="beer" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f37a.png?v8" height="20" width="20"> tapメソッド</h1><ul>
+<li>なにもしない</li>
+<li>全オブジェクトが使える</li>
+</ul>
+<pre class=" language-なにもしないtap.rb"><code class="language-なにもしないtap.rb">[1] pry(main)> 1.tap {|num| puts num}
+1
+=> 1
+[2] pry(main)> 1.tap {|num| 50}
+=> 1 
+</code></pre>
+<h3 id="なにもしないtapを使ってクライアントの設定をする"><a href="#なにもしないtapを使ってクライアントの設定をする" class="headerlink" title=" なにもしないtapを使ってクライアントの設定をする"></a><img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="sparkles" alt="sparkles" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2728.png?v8" height="20" width="20"> なにもしないtapを使ってクライアントの設定をする</h3><pre class=" language-rb"><code class="language-rb">    def octkit_client
+      @octokit_client ||=
+        Octokit::Client.new(access_token: ENV['PERSONAL_ACCESS_TOKEN']).tap do |c|
+          c.auto_paginate = true # ココ！
+        end
+    end
+</code></pre>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=リファクタリングのポイント%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>

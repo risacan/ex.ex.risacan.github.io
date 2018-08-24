@@ -1,0 +1,145 @@
+<!doctype>
+<html lang="ja">
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title>brainf*ck-goを使って言語を作る! | risacan.github.io</title>
+
+<title>risacan.github.io</title>
+<script src="/js/script.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="shortcut icon" href="/images/profile.png">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84656331-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-84656331-1');
+</script>
+
+<meta name="description" content="やったこと nownab.log | 誰でもBrainf*ckっぽい言語が作れる？ツール作ったを使って絵文字言語作った  手順 💻 を買い替えてからGoをいれていなかったようなので、Goをインストール  Downloads - The Go Programming Language インストール中もGopherくんが出てきて良い！   $GOPATH を設定。  GOPATH は適当に決めて問題">
+<meta name="keywords" content="go, emoji">
+<meta property="og:type" content="article">
+<meta property="og:title" content="brainf*ck-goを使って言語を作る!">
+<meta property="og:url" content="http://risacan.github.io/use-brainfuck-go-to-make-a-new-lang/index.html">
+<meta property="og:site_name" content="risacan.github.io">
+<meta property="og:description" content="やったこと nownab.log | 誰でもBrainf*ckっぽい言語が作れる？ツール作ったを使って絵文字言語作った  手順 💻 を買い替えてからGoをいれていなかったようなので、Goをインストール  Downloads - The Go Programming Language インストール中もGopherくんが出てきて良い！   $GOPATH を設定。  GOPATH は適当に決めて問題">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png?v8">
+<meta property="og:updated_time" content="2017-03-27T00:36:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="brainf*ck-goを使って言語を作る!">
+<meta name="twitter:description" content="やったこと nownab.log | 誰でもBrainf*ckっぽい言語が作れる？ツール作ったを使って絵文字言語作った  手順 💻 を買い替えてからGoをいれていなかったようなので、Goをインストール  Downloads - The Go Programming Language インストール中もGopherくんが出てきて良い！   $GOPATH を設定。  GOPATH は適当に決めて問題">
+<meta name="twitter:image" content="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png?v8">
+<meta name="twitter:creator" content="@_risacan_">
+<link rel="stylesheet" href="https://csshake.surge.sh/csshake.min.css">
+
+<body class="background courier">
+  <header>
+  <div class="tc pv4">
+    <a href=""https://risacan.github.io"><img src="/images/profile.png" class="pa1 h3 w3 shake-rotate" alt="avatar"></a>
+    <h1 class="f5 f4-ns fw6 mid-gray">risacan.github.io</h1>
+    <h2 class="f6 gray fw2 ttu tracked"></h2>
+  </div>
+</header>
+
+  <nav class="db dt-l w-100 border-box">
+  <div class="tc mb3">
+    <a href="/about" title="📛" class="link dim gray f6 f5-ns dib m3">📛</a>
+    <a href="/" title="📝" class="link dim gray f6 f5-ns dib m3">📝</a>
+    <a href="/works" title="💎" class="link dim gray f6 f5-ns dib m3">💎</a>
+  </div>
+</nav>
+
+  <main class="mw7 pl3 pr3 pb3 mb3 center"><article class="pl3 pr3">
+  <h1 class="f3 mb0">BRAINF*CK-GOを使って言語を作る!</h1>
+  
+    <span class="f6 blue">2017-03-27 00:36:07 Monday</span>
+  
+  <div class="article-body"><h1 id="やったこと"><a href="#やったこと" class="headerlink" title="やったこと"></a>やったこと</h1><ul>
+<li><a href="https://blog.nownabe.com/2017/03/25/660.html" target="_blank" rel="noopener">nownab.log | 誰でもBrainf*ckっぽい言語が作れる？ツール作った</a>を使って絵文字言語作った</li>
+</ul>
+<h1 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h1><ul>
+<li><p>💻 を買い替えてからGoをいれていなかったようなので、Goをインストール</p>
+<ul>
+<li><a href="https://golang.org/dl/" target="_blank" rel="noopener">Downloads - The Go Programming Language</a></li>
+<li>インストール中もGopherくんが出てきて良い！</li>
+</ul>
+</li>
+<li><p><code>$GOPATH</code> を設定。</p>
+<ul>
+<li><a href="http://qiita.com/yuku_t/items/c7ab1b1519825cc2c06f" target="_blank" rel="noopener">GOPATH は適当に決めて問題ない - Qiita</a></li>
+<li>私はzshを使っているので  <code>~/.zshrc</code>に <code>export GOPATH=$HOME/.go</code> を追記した <img class="github-emoji" style="vertical-align:text-bottom;height:16px;width:16px" title="heavy_check_mark" alt="heavy_check_mark" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png?v8" height="20" width="20"></li>
+<li>ターミナルを再起動する</li>
+</ul>
+</li>
+<li><p><a href="https://blog.nownabe.com/2017/03/25/660.html" target="_blank" rel="noopener">nownab.log | 誰でもBrainf*ckっぽい言語が作れる？ツール作った</a>を参考に、<code>go get</code> コマンドでインストール</p>
+</li>
+<li><code>go get -u github.com/nownabe/brainfuck-go</code></li>
+<li>先程設定したGOPATH以下に<code>brainfuck-go</code> コマンドが入るぽいので、<code>~/.go/bin/brainfuck-go</code> で実行できる</li>
+</ul>
+<h1 id="結果"><a href="#結果" class="headerlink" title="結果"></a>結果</h1><pre class=" language-books.json"><code class="language-books.json">{
+  "next": "📕",
+  "prev": "📒",
+  "inc": "📗",
+  "dec": "📘",
+  "read": "📔",
+  "write": "📓",
+  "open": "[",
+  "close": "]",
+  "whitespaces": " \t\r\n"
+}
+</code></pre>
+<pre class=" language-fizzbuzz.bf"><code class="language-fizzbuzz.bf">📗📗📗📗📗📗[📘📕📗📗📗📗📕 📕📗📕📗📕📘📒📒📒📒📒]📕[📒📗📗📗📗📕 📕📗📗📗📕📗📗📗📗📕 📕📗📗📗📕📗
+📗📗📗📗📕📗📗📗📗📗📕 📕 📕 📕 📕 📕📗📗📕 📕📗📗📒📒📒📒📒📒📒📒📒📒📒📒📒📒📘]📒📗📗📗📗📕📗📗📗
+📕📘📘📕📗📗📗📕📘📕 📕📘📘📘📕📗📗📕 📕 📕📗📗📗📗📗[📘📕📗📗📕📗📗📒📒]📒📒📒📒📒📒📒📒📒📒[📘📕📘
+[📕 📕 📕 📕 📕 📕 📕]📕[📒📗📗📗📕📓📕📓📕 📕 📕 📕📓📓📕 📕 📕📗📒]📒📒📒📒📒📘[📕 📕 📕 📕]📕[📒📗
+📗📗📗📗📕📓📕📓📕📓📓📕 📕 📕📗📒]📕 📕 📕 📕📗📒📘[📒📒📒]📒[[📘📒📒📗📕 📕]📕 📕 📕📗📕📗📒📒📒📒📒
+📒[📘📕 📕📗📕📗📕📘📒📒📒📒]📒]📕📕[[📘]📒]📕[📕 📕 📕[📕📓📒📒📓📒📒📒]📒[📓📒📒📒📒]📕]📕📓📒📒📒📒
+📒📒📒📒📒📒📒]
+</code></pre>
+<pre class=" language-go"><code class="language-go">🌸 ~<span class="token operator">/</span><span class="token punctuation">.</span><span class="token keyword">go</span><span class="token operator">/</span>bin<span class="token operator">/</span>brainfuck<span class="token operator">-</span><span class="token keyword">go</span> <span class="token operator">-</span>conf books<span class="token punctuation">.</span>json fizzbuzz<span class="token punctuation">.</span>bf
+Input<span class="token punctuation">:</span> 📗📗📗📗📗📗<span class="token punctuation">[</span>📘📕📗📗📗📗📕 📕📗📕📗📕📘📒📒📒📒📒<span class="token punctuation">]</span>📕<span class="token punctuation">[</span>📒📗📗📗📗📕 📕📗📗📗📕📗📗📗📗📕 📕📗📗📗📕📗
+📗📗📗📗📕📗📗📗📗📗📕 📕 📕 📕 📕 📕📗📗📕 📕📗📗📒📒📒📒📒📒📒📒📒📒📒📒📒📒📘<span class="token punctuation">]</span>📒📗📗📗📗📕📗📗📗
+📕📘📘📕📗📗📗📕📘📕 📕📘📘📘📕📗📗📕 📕 📕📗📗📗📗📗<span class="token punctuation">[</span>📘📕📗📗📕📗📗📒📒<span class="token punctuation">]</span>📒📒📒📒📒📒📒📒📒📒<span class="token punctuation">[</span>📘📕📘
+<span class="token punctuation">[</span>📕 📕 📕 📕 📕 📕 📕<span class="token punctuation">]</span>📕<span class="token punctuation">[</span>📒📗📗📗📕📓📕📓📕 📕 📕 📕📓📓📕 📕 📕📗📒<span class="token punctuation">]</span>📒📒📒📒📒📘<span class="token punctuation">[</span>📕 📕 📕 📕<span class="token punctuation">]</span>📕<span class="token punctuation">[</span>📒📗
+📗📗📗📗📕📓📕📓📕📓📓📕 📕 📕📗📒<span class="token punctuation">]</span>📕 📕 📕 📕📗📒📘<span class="token punctuation">[</span>📒📒📒<span class="token punctuation">]</span>📒<span class="token punctuation">[</span><span class="token punctuation">[</span>📘📒📒📗📕 📕<span class="token punctuation">]</span>📕 📕 📕📗📕📗📒📒📒📒📒
+📒<span class="token punctuation">[</span>📘📕 📕📗📕📗📕📘📒📒📒📒<span class="token punctuation">]</span>📒<span class="token punctuation">]</span>📕📕<span class="token punctuation">[</span><span class="token punctuation">[</span>📘<span class="token punctuation">]</span>📒<span class="token punctuation">]</span>📕<span class="token punctuation">[</span>📕 📕 📕<span class="token punctuation">[</span>📕📓📒📒📓📒📒📒<span class="token punctuation">]</span>📒<span class="token punctuation">[</span>📓📒📒📒📒<span class="token punctuation">]</span>📕<span class="token punctuation">]</span>📕📓📒📒📒📒
+📒📒📒📒📒📒📒<span class="token punctuation">]</span>
+<span class="token number">1</span>
+<span class="token number">2</span>
+Fizz
+<span class="token number">4</span>
+Buzz
+Fizz
+<span class="token number">7</span>
+<span class="token number">8</span>
+Fizz
+Buzz
+<span class="token number">11</span>
+Fizz
+<span class="token number">13</span>
+<span class="token number">14</span>
+FizzBuzz
+~ 中略 ~
+<span class="token punctuation">(</span>END<span class="token punctuation">)</span>
+</code></pre>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><ul>
+<li>emojiのチョイスが大変単調なものになってしまい、emoji力の低まりを感じた☹️  鍛えないと・・・🏋️🏋️🏋️</li>
+</ul>
+</div>
+  
+    <a href="https://twitter.com/intent/tweet?text=brainf*ck-goを使って言語を作る!%20|%20risacan.github.io&url=" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  
+</article>
+
+</main>
+  <footer>
+  <div class="tc pb3">
+    <a class="link dim gray f6 f5-ns dib mr3" href="https://twitter.com/_risacan_">@risacan</a>
+  </div>
+</footer>
+
+</body>
+</html>
